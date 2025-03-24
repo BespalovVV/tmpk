@@ -1,7 +1,7 @@
 from datetime import datetime
 import enum
 from sqlalchemy import String, text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Annotated
 from db.session import Base, str_128, str_256, str_64
 
@@ -31,7 +31,7 @@ class User(Base):
     id:Mapped[intpk]
     name:Mapped[str_128] = mapped_column(nullable=False)
     login: Mapped[str_64] = mapped_column(nullable=False, unique=True)
-    password: Mapped[str_64] = mapped_column(nullable=False)
+    password: Mapped[str_256] = mapped_column(nullable=False)
     email: Mapped[str_128] = mapped_column(nullable=False, unique=True)
     role: Mapped[Role] = mapped_column(default=Role.unknown_user)
     

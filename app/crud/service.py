@@ -28,7 +28,7 @@ async def get_service_by_id(service_id: int, db: AsyncSession) -> Service:
         result = await db.execute(select(Service).filter(Service.id == service_id))
         service = result.scalar_one_or_none()
         if not service:
-            raise HTTPException(status_code=404, detail="Сервис не найден")
+            raise Exception("Сервис не найден")
         return service
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении сервиса: {str(e)}")
@@ -36,9 +36,10 @@ async def get_service_by_id(service_id: int, db: AsyncSession) -> Service:
 async def update_service(service_id: int, data: ServiceUpdate, db: AsyncSession) -> Service:
     try:
         async with db.begin():
-            service = await get_service_by_id(service_id, db)
+            result = await db.execute(select(Service).filter(Service.id == service_id))
+            service = result.scalar_one_or_none()
             if not service:
-                raise HTTPException(status_code=404, detail="Сервис не найден")
+                raise Exception("Сервис не найден")
             if data.name_service:
                 service.name_service = data.name_service
             return service
@@ -48,9 +49,10 @@ async def update_service(service_id: int, data: ServiceUpdate, db: AsyncSession)
 async def delete_service(service_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            service = await get_service_by_id(service_id, db)
+            result = await db.execute(select(Service).filter(Service.id == service_id))
+            service = result.scalar_one_or_none()
             if not service:
-                raise HTTPException(status_code=404, detail="Сервис не найден")
+                raise Exception("Сервис не найден")
             await db.delete(service)
         return True
     except Exception as e:

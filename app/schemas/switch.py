@@ -6,14 +6,14 @@ class SwitchCreate(BaseModel):
     name_com: str = Field(..., max_length=128)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class SwitchUpdate(BaseModel):
     IP: Optional[str] = Field(None, max_length=15)
     name_com: Optional[str] = Field(None, max_length=128)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class SwitchResponse(BaseModel):
     id: int
@@ -21,4 +21,4 @@ class SwitchResponse(BaseModel):
     name_com: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True

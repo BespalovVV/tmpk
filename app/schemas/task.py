@@ -12,7 +12,7 @@ class TaskCreate(BaseModel):
     assign_to: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для обновления задачи
 class TaskUpdate(BaseModel):
@@ -24,7 +24,7 @@ class TaskUpdate(BaseModel):
     assign_to: Optional[int] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для ответа с информацией о задаче
 class TaskResponse(BaseModel):
@@ -38,4 +38,4 @@ class TaskResponse(BaseModel):
     assign_to: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -35,7 +35,7 @@ async def get_task_by_id(task_id: int, db: AsyncSession) -> Task:
         result = await db.execute(select(Task).filter(Task.id == task_id))
         task = result.scalar_one_or_none()
         if not task:
-            raise HTTPException(status_code=404, detail="Задача не найдена")
+            raise Exception("Задача не найдена")
         return task
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении задачи: {str(e)}")
@@ -43,9 +43,10 @@ async def get_task_by_id(task_id: int, db: AsyncSession) -> Task:
 async def update_task(task_id: int, data: TaskUpdate, db: AsyncSession) -> Task:
     try:
         async with db.begin():
-            task = await get_task_by_id(task_id, db)
+            result = await db.execute(select(Task).filter(Task.id == task_id))
+            task = result.scalar_one_or_none()
             if not task:
-                raise HTTPException(status_code=404, detail="Задача не найдена")
+                raise Exception("Задача не найдена")
             if data.description:
                 task.description = data.description
             if data.topic:
@@ -65,9 +66,10 @@ async def update_task(task_id: int, data: TaskUpdate, db: AsyncSession) -> Task:
 async def delete_task(task_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            task = await get_task_by_id(task_id, db)
+            result = await db.execute(select(Task).filter(Task.id == task_id))
+            task = result.scalar_one_or_none()
             if not task:
-                raise HTTPException(status_code=404, detail="Задача не найдена")
+                raise Exception("Задача не найдена")
             await db.delete(task)
         return True
     except Exception as e:

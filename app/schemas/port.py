@@ -3,12 +3,10 @@ from pydantic import BaseModel, Field
 from enum import Enum
 from typing import Optional
 
-# Перечисление для статуса соединения
 class LinkStatus(str, enum.Enum):
     Connected = "Подключен",
     Disconnected = "Отключен",
 
-# Схема для создания порта
 class PortCreate(BaseModel):
     number: int
     name_port: str = Field(..., max_length=128)
@@ -16,18 +14,16 @@ class PortCreate(BaseModel):
     switch_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
-# Схема для обновления порта
 class PortUpdate(BaseModel):
     number: Optional[int] = None
     name_port: Optional[str] = Field(None, max_length=128)
-    status_link: Optional[LinkStatus] = None
+    status_link: Optional[LinkStatus] = LinkStatus.Disconnected
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
-# Схема для ответа с информацией о порте
 class PortResponse(BaseModel):
     id: int
     number: int
@@ -36,4 +32,4 @@ class PortResponse(BaseModel):
     switch_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

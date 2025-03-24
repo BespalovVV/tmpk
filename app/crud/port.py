@@ -34,7 +34,7 @@ async def get_port_by_id(port_id: int, db: AsyncSession) -> Port:
         result = await db.execute(select(Port).filter(Port.id == port_id))
         port = result.scalar_one_or_none()
         if not port:
-            raise HTTPException(status_code=404, detail="Порт не найден")
+            raise Exception("Порт не найден")
         return port
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении порта: {str(e)}")
@@ -42,9 +42,10 @@ async def get_port_by_id(port_id: int, db: AsyncSession) -> Port:
 async def update_port(port_id: int, data: PortUpdate, db: AsyncSession) -> Port:
     try:
         async with db.begin():
-            port = await get_port_by_id(port_id, db)
+            result = await db.execute(select(Port).filter(Port.id == port_id))
+            port = result.scalar_one_or_none()
             if not port:
-                raise HTTPException(status_code=404, detail="Порт не найден")
+                raise Exception("Порт не найден")
             if data.number is not None:
                 port.number = data.number
             if data.name_port:
@@ -58,10 +59,10 @@ async def update_port(port_id: int, data: PortUpdate, db: AsyncSession) -> Port:
 async def delete_port(port_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            port = await get_port_by_id(port_id, db)
+            result = await db.execute(select(Port).filter(Port.id == port_id))
+            port = result.scalar_one_or_none()
             if not port:
-                raise HTTPException(status_code=404, detail="Порт не найден")
-            
+                raise Exception("Порт не найден")
             await db.delete(port)
         return True
     except Exception as e:

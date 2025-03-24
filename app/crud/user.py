@@ -3,11 +3,13 @@ from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
+from core.security import get_hashed_password
 from models.user import User
 from schemas.user import UserCreate, UserUpdate
 
 async def create_user(data: UserCreate, db: AsyncSession) -> User:
-    user = User(name=data.name, login=data.login, password=data.password, email=data.email)
+    hashed_password = get_hashed_password(data.password)
+    user = User(name=data.name, login=data.login, password=hashed_password, email=data.email)
     try:
         db.add(user)
         await db.commit()
@@ -26,14 +28,11 @@ async def get_all_users(db: AsyncSession) -> List[User]:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении пользователей: {str(e)}")
 
 async def get_user_by_id(user_id: int, db: AsyncSession) -> User:
-    try:
-        result = await db.execute(select(User).filter(User.id == user_id))
-        user = result.scalar_one_or_none()
-        if not user:
-            raise HTTPException(status_code=404, detail="Пользователь не найден")
-        return user
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Ошибка при получении пользователя: {str(e)}")
+    result = await db.execute(select(User).filter(User.id == user_id))
+    user = result.scalar_one_or_none()
+    if not user:
+        raise HTTPException(status_code=404, detail="Пользователь не найден")
+    return user
 
 async def get_user_by_name(username: str, db: AsyncSession) -> User:
     try:
@@ -62,9 +61,10 @@ async def get_user_by_email(email: str, db: AsyncSession) -> User:
 async def update_user(user_id: int, data: UserUpdate, db: AsyncSession) -> User:
     try:
         async with db.begin():
-            user = await get_user_by_id(user_id, db)
+            result = await db.execute(select(User).filter(User.id == user_id))
+            user = result.scalar_one_or_none()
             if not user:
-                raise HTTPException(status_code=404, detail="Пользователь не найден")
+                raise Exception("Пользователь не найден")
             if data.name:
                 user.name = data.name
             if data.login:
@@ -80,10 +80,10 @@ async def update_user(user_id: int, data: UserUpdate, db: AsyncSession) -> User:
 async def delete_user(user_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            user = await get_user_by_id(user_id, db)
+            result = await db.execute(select(User).filter(User.id == user_id))
+            user = result.scalar_one_or_none()
             if not user:
-                raise HTTPException(status_code=404, detail="Пользователь не найден")
-            
+                raise Exception("Пользователь не найден")
             await db.delete(user)
         return True
     except Exception as e:

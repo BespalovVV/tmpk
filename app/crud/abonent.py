@@ -39,7 +39,7 @@ async def get_abon_by_id(abon_id: int, db: AsyncSession) -> Abonent:
         result = await db.execute(select(Abonent).filter(Abonent.id == abon_id))
         abon = result.scalar_one_or_none()
         if not abon:
-            raise HTTPException(status_code=404, detail="Абонент не найден")
+            raise Exception("Абонент не найден")
         return abon
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении абонента: {str(e)}")
@@ -55,9 +55,10 @@ async def get_abon_by_phone_number(phone_number: str, db: AsyncSession) -> Abone
 async def update_abon(abon_id: int, data: AbonUpdate, db: AsyncSession) -> Abonent:
     try:
         async with db.begin():
-            abon = await get_abon_by_id(abon_id, db)
+            result = await db.execute(select(Abonent).filter(Abonent.id == abon_id))
+            abon = result.scalar_one_or_none()
             if not abon:
-                raise HTTPException(status_code=404, detail="Абонент не найден")
+                raise Exception("Абонент не найден")
             if data.abon_name:
                 abon.abon_name = data.abon_name
             if data.phone_number:
@@ -71,9 +72,10 @@ async def update_abon(abon_id: int, data: AbonUpdate, db: AsyncSession) -> Abone
 async def delete_abon(abon_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            abon = await get_abon_by_id(abon_id, db)
+            result = await db.execute(select(Abonent).filter(Abonent.id == abon_id))
+            abon = result.scalar_one_or_none()
             if not abon:
-                raise HTTPException(status_code=404, detail="Абонент не найден")
+                raise Exception("Абонент не найден")
             await db.delete(abon)
         return True
     except Exception as e:

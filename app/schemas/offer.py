@@ -10,6 +10,9 @@ class OfferCreate(BaseModel):
     address_id: int
     abon_id: int
     
+    class Config:
+        from_attributes = True
+    
 class OfferUpdate(BaseModel):
     phone: Optional[str] = Field(None, max_length=10)
     osmp: Optional[int] = None
@@ -17,6 +20,9 @@ class OfferUpdate(BaseModel):
     abon_name: Optional[str] = Field(None, max_length=128)
     address_id: Optional[int] = None
     abon_id: Optional[int] = None
+    
+    class Config:
+        from_attributes = True
     
 class OfferResponse(BaseModel):
     id: int
@@ -26,6 +32,6 @@ class OfferResponse(BaseModel):
     abon_name: str = Field(..., max_length=128)
     address_id: int
     abon_id: int
-
+    
     class Config:
-        orm_mode = True
+        from_attributes = True

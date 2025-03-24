@@ -46,7 +46,7 @@ async def get_offer_by_id(offer_id: int, db: AsyncSession) -> Offer:
         result = await db.execute(select(Offer).filter(Offer.id == offer_id))
         offer = result.scalar_one_or_none()
         if not offer:
-            raise HTTPException(status_code=404, detail="Договор не найден")
+            raise Exception("Договор не найден")
         return offer
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении договора: {str(e)}")
@@ -56,9 +56,10 @@ async def update_offer(offer_id: int, data: OfferUpdate, db: AsyncSession) -> Of
     if re.fullmatch(phone_regex, data.phone):
         try:
             async with db.begin():
-                offer = await get_offer_by_id(offer_id, db)
+                result = await db.execute(select(Offer).filter(Offer.id == offer_id))
+                offer = result.scalar_one_or_none()
                 if not offer:
-                    raise HTTPException(status_code=404, detail="Договор не найден")
+                    raise Exception("Договор не найден")
                 if data.phone:
                     offer.phone = data.phone
                 if data.osmp:
@@ -81,9 +82,10 @@ async def update_offer(offer_id: int, data: OfferUpdate, db: AsyncSession) -> Of
 async def delete_offer(offer_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            offer = await get_offer_by_id(offer_id, db)
+            result = await db.execute(select(Offer).filter(Offer.id == offer_id))
+            offer = result.scalar_one_or_none()
             if not offer:
-                raise HTTPException(status_code=404, detail="Договор не найдено")
+                raise Exception("Договор не найден")
             await db.delete(offer)
         return True
     except Exception as e:

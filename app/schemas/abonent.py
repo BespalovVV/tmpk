@@ -15,10 +15,16 @@ class AbonCreate(BaseModel):
     phone_number: str = Field(..., max_length=10, min_length=10)
     status: AbonStatus
     
+    class Config:
+        from_attributes = True
+    
 class AbonUpdate(BaseModel):
     abon_name: Optional[str] = Field(None, max_length=128)
     phone_number: Optional[str] = Field(None, max_length=10, min_length=10)
     status: Optional[AbonStatus] = Field(None)
+    
+    class Config:
+        from_attributes = True
     
 class AbonResponse(BaseModel):
     id: int
@@ -27,4 +33,4 @@ class AbonResponse(BaseModel):
     status: AbonStatus
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -30,7 +30,7 @@ async def get_address_by_id(address_id: int, db: AsyncSession) -> Address:
         result = await db.execute(select(Address).filter(Address.id == address_id))
         address = result.scalar_one_or_none()
         if not address:
-            raise HTTPException(status_code=404, detail="Адрес не найден")
+            raise Exception("Адрес не найден")
         return address
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при получении адреса: {str(e)}")
@@ -38,9 +38,10 @@ async def get_address_by_id(address_id: int, db: AsyncSession) -> Address:
 async def update_address(address_id: int, data: AddressUpdate, db: AsyncSession) -> Address:
     try:
         async with db.begin():
-            address = await get_address_by_id(address_id, db)
+            result = await db.execute(select(Address).filter(Address.id == address_id))
+            address = result.scalar_one_or_none()
             if not address:
-                raise HTTPException(status_code=404, detail="Адрес не найден")
+                raise Exception("Адрес не найден")
             if data.address:
                 address.address = data.address
             if data.com_id:
@@ -52,9 +53,10 @@ async def update_address(address_id: int, data: AddressUpdate, db: AsyncSession)
 async def delete_address(address_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
-            address = await get_address_by_id(address_id, db)
+            result = await db.execute(select(Address).filter(Address.id == address_id))
+            address = result.scalar_one_or_none()
             if not address:
-                raise HTTPException(status_code=404, detail="Адрес не найден")
+                raise Exception("Адрес не найден")
             await db.delete(address)
         return True
     except Exception as e:
