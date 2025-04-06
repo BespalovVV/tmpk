@@ -1,0 +1,33 @@
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(20, 54, 224, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+}
+  
+.card__header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #1436e0;
+}
+  
+.card__title {
+    font-size: 16px;
+}
+  
+.card__deadline {
+    color: #000;
+    font-weight: normal;
+}
+  
+.card__footer {
+    font-size: 12px;
+    text-align: right;
+    color: #666;
+}
+  

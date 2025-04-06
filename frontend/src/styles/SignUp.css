@@ -1,0 +1,126 @@
+.sign-up-page {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 460px;
+    margin: auto;
+    padding: 40px 20px;
+    width: 100%;
+}
+  
+.sign-up__message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    justify-content: center;
+    flex-direction: column;
+}
+  
+.logo {
+    width: 48px;
+    height: auto;
+}
+  
+.main-message {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+  
+.sign-up__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+  
+.sign-up__inputs > div {
+    display: flex;
+    flex-direction: column;
+}
+  
+.input-block label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #000;
+}
+  
+.input-block input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+  
+.sign-up__submit {
+    margin-top: 12px;
+    background-color: #1436E0;
+    color: white;
+    padding: 14px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+  
+.to-sign-in {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+}
+  
+.to-sign-in + .to-sign-in__link {
+    text-align: center;
+    margin-top: 4px;
+    color: #1436E0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+@media screen and (min-width: 1024px) {
+    .sign-up {
+      margin-left: 5%;
+      margin-top: 6%;
+    }
+}
+  
+@media screen and (max-width: 768px) {
+    .sign-up {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .main-message {
+      font-size: 22px;
+    }
+  
+    .sign-up__submit {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .input-block input {
+      font-size: 15px;
+      padding: 10px;
+    }
+  
+    .to-sign-in {
+      font-size: 13px;
+    }
+}
+
+.sign-up__inputs input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
