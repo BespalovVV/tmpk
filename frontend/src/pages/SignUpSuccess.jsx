@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/SignUp.css";
 import { Link } from "react-router-dom";
-import ItWorkSidebar from "./ItWorkSidebar";
+import ItWorkSidebar from "../components/ItWorkSidebar";
 
 export const SignUpSuccess = () => {
   return (

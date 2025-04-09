@@ -1,4 +1,5 @@
 import axios from "axios";
+import Endpoint from "./Endpoints";
 
 export default class UserService{
     static async getAll(){
