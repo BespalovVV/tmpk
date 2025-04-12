@@ -14,20 +14,17 @@
     justify-content: space-between;
     font-weight: bold;
     color: #1436e0;
-}
-  
-.card__title {
-    font-size: 16px;
+    font-size: 20px;
 }
   
 .card__deadline {
-    color: #000;
+    color: #000000;
     font-weight: normal;
+    font-size: 14px;
 }
   
 .card__footer {
-    font-size: 12px;
     text-align: right;
-    color: #666;
+    color: #666666;
 }
   
