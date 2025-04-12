@@ -46,10 +46,6 @@
     .main-page__cards {
       grid-template-columns: 1fr 1fr;
     }
-  
-    .mobile {
-      display: none;
-    }
 }
 
 .main-page__bottom-nav {
@@ -70,21 +66,7 @@
     color: #1436e0;
     font-weight: bold;
 }
-  
-.desktop {
-    display: none;
-}
-  
-@media screen and (min-width: 1024px) {
-    .desktop {
-      display: flex;
-    }
-  
-    .mobile {
-      display: none;
-    }
-}
-  
+ 
 .user {
     display: flex;
     align-items: center;
@@ -102,3 +84,6 @@
     width: auto; 
 }
   
+.user {
+    cursor: pointer;
+}

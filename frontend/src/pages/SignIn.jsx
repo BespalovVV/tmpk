@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import axios from "axios";
 import Endpoint from "../API/Endpoints";
 import ItWorkSidebar from "../components/ItWorkSidebar";
 import MyInput from "../components/UI/input/MyInput";
 import MyButton from "../components/UI/button/MyButton";
-import "../styles/SignIn.css";
+import "../styles/Registration.css";
 
 const SignIn = () => {
   const { setIsAuth } = useContext(AuthContext);
@@ -45,23 +45,27 @@ const SignIn = () => {
     }
   };
 
+  const handleRedirect = () => {
+      navigate('/signup');
+  };
+
   return (
-    <div className="sign-in-page">
-      <div className="sign-in">
-        <div className="sign-in__message">
-          <p className="main-message">С возвращением к команде ТМПК!</p>
-          <p className="additional-message">Работа может быть в удовольствие</p>
+    <div className="registration-page">
+      <div className="registration">
+        <div className="registration__message">
+          <p className="main-message">С возвращением <br></br>к команде ТМПК!</p>
+          <p className="additional-message secondary-text ">Работа может быть в удовольствие</p>
         </div>
 
         {errorMessage && <p style={{ color: "red", marginBottom: "1rem" }}>{errorMessage}</p>}
 
-        <form className="sign-in__inputs" onSubmit={handleSubmit(login)}>
+        <form className="registration__inputs" onSubmit={handleSubmit(login)}>
           <div className="email-input">
-            <label className="label" htmlFor="login_or_email">Email или логин</label>
             <MyInput
               id="login_or_email"
               placeholder="Введите email или логин"
               type="text"
+              label="Email или логин"
               {...register("login_or_email", {
                 required: "Поле обязательно для заполнения",
               })}
@@ -72,11 +76,11 @@ const SignIn = () => {
           </div>
 
           <div className="password-input">
-            <label className="label" htmlFor="password">Пароль</label>
             <MyInput
               id="password"
               placeholder="Введите пароль"
               type="password"
+              label="Пароль"
               {...register("password", {
                 required: "Пароль обязателен",
                 minLength: {
@@ -99,17 +103,13 @@ const SignIn = () => {
           </div>
 
           <div className="buttons">
-            <MyButton className="button-sign-in" type="submit">Войти</MyButton>
+            <MyButton className="button-registration primary-button auth" type="submit">Войти</MyButton>
           </div>
         </form>
 
         <div className="to-sign-up">
-          <p>Нет аккаунта?</p>
-          <button>
-            <Link to="/signup" className="to-sign-up__link">
-              Создать аккаунт
-            </Link>
-          </button>
+          <span className='secondary-text'>Нет аккаунта?</span>
+          <MyButton className='button-registration secondary-button auth' type="button" onClick={handleRedirect}>Создать аккаунт</MyButton>
         </div>
       </div>
       <ItWorkSidebar />

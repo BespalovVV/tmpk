@@ -1,0 +1,30 @@
+
+.menu-header__text {
+    display: inline-block;
+}
+  
+.menu-header__item {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 769px) {
+    .menu-header {
+      bottom: 0;
+    }
+}
+  
+@media screen and (min-width: 768px) {
+    .menu-header {
+      top: 0;
+    }
+}
+
+.menu-header {
+    position: -webkit-sticky;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: space-between;
+}

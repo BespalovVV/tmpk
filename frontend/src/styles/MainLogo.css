@@ -1,0 +1,19 @@
+@media screen and (max-width: 768px) {
+    .headline-tmpk {
+        justify-content: center;
+    }  
+    .tmpk-text {
+        display: none !important;
+    }
+}
+
+.tmpk-text {
+    font-size: 28px;
+    color: #1436E0;
+    text-transform: uppercase;
+}
+
+.headline-tmpk {
+    gap: 16px;
+}
+  

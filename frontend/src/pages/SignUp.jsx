@@ -3,15 +3,17 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import MyButton from "../components/UI/button/MyButton";
 import MyInput from "../components/UI/input/MyInput";
-import { Link } from "react-router-dom";
-import "../styles/SignUp.css";
+import { useNavigate } from "react-router-dom";
 import ItWorkSidebar from "../components/ItWorkSidebar";
 import Endpoint from "../API/Endpoints";
+import "../styles/Registration.css";
 
 const SignUp = () => {
   const { register, formState: { errors, isValid }, handleSubmit, reset, watch } = useForm({
     mode: "onBlur",
   });
+  
+  const navigate = useNavigate();
 
   const password = watch("password");
 
@@ -29,21 +31,27 @@ const SignUp = () => {
 
     try {
       await axios.post(URL, payload);
+      localStorage.setItem("auth", "true");
+      navigate("/signupsuccess");
       reset();
     } catch (e) {
         console.error(e.response?.data);
     }
   };
 
+  const handleRedirect = () => {
+    navigate('/signin');
+  };
+
   return (
-    <div className="sign-up-page">
-      <div className="sign-up">
-        <div className="sign-up__message">
+    <div className="registration-page">
+      <div className="registration">
+        <div className="registration__message">
           <p className="main-message">Регистрация</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="sign-up__inputs">
-          <label>
+        <form onSubmit={handleSubmit(onSubmit)} className="registration__inputs">
+          <div className='surname-input'>
             <MyInput
               {...register("surname", {
                 required: "Поле обязательно к заполнению",
@@ -56,10 +64,10 @@ const SignUp = () => {
               id="surname"
               name="surname"
             />
-          </label>
+          </div>
           {errors?.surname && <p style={{ color: "red" }}>{errors?.surname?.message}</p>}
 
-          <label>
+          <div className="name-input">
             <MyInput
               {...register("name", {
                 required: "Поле обязательно к заполнению",
@@ -72,10 +80,10 @@ const SignUp = () => {
               id="name"
               name="name"
             />
-          </label>
+          </div>
           {errors?.name && <p style={{ color: "red" }}>{errors?.name?.message}</p>}
 
-          <label>
+          <div className="patronimic-input">
             <MyInput
               {...register("patronimic", {
                 required: "Поле обязательно к заполнению",
@@ -86,10 +94,10 @@ const SignUp = () => {
               id="patronimic"
               name="patronimic"
             />
-          </label>
+          </div>
           {errors?.patronimic && <p style={{ color: "red" }}>{errors?.patronimic?.message}</p>}
 
-          <label>
+          <div className="email-input">
             <MyInput
               {...register("email", {
                 required: "Поле обязательно к заполнению",
@@ -104,10 +112,10 @@ const SignUp = () => {
               id="email"
               name="email"
             />
-          </label>
+          </div>
           {errors?.email && <p style={{ color: "red" }}>{errors?.email?.message}</p>}
 
-          <label>
+          <div className="login-input">
             <MyInput
               {...register("login", {
                 required: "Поле обязательно к заполнению",
@@ -115,14 +123,14 @@ const SignUp = () => {
               })}
               label="Логин"
               type="text"
-              placeholder="Введите логин"
+              placeholder="Придумайте логин"
               id="login"
               name="login"
             />
-          </label>
+          </div>
           {errors?.login && <p style={{ color: "red" }}>{errors?.login?.message}</p>}
 
-          <label>
+          <div className="password-input">
             <MyInput
               {...register("password", {
                 required: "Поле обязательно к заполнению",
@@ -134,40 +142,38 @@ const SignUp = () => {
               })}
               label="Пароль"
               type="password"
-              placeholder="Введите пароль"
+              placeholder="Придумайте пароль"
               id="password"
               name="password"
               autoComplete="new-password"
             />
-          </label>
+          </div>
           {errors?.password && <p style={{ color: "red" }}>{errors?.password?.message}</p>}
 
-          <label>
+          <div className="password-verification-input">
             <MyInput
               {...register("confirmPassword", {
                 required: "Поле обязательно к заполнению",
                 validate: (value) => value === password || "Пароли не совпадают",
               })}
-              label="Подтверждение пароля"
+              label="Пароль"
               type="password"
-              placeholder="Подтвердите пароль"
+              placeholder="Повторите пароль"
               id="confirmPassword"
               name="confirmPassword"
               autoComplete="current-password"
             />
-          </label>
+          </div>
           {errors?.confirmPassword && <p style={{ color: "red" }}>{errors?.confirmPassword?.message}</p>}
 
-          <MyButton type="submit" disabled={!isValid}>
-            Зарегистрироваться
-          </MyButton>
+          <div className="buttons">
+            <MyButton className="button-registration primary-button auth" type="submit">Зарегистироваться</MyButton>
+          </div>
         </form>
 
         <div className="to-sign-in">
-          <p>Уже есть аккаунт?</p>
-          <button>
-            <Link to="/signin" className="to-sign-in__link">Войти</Link>
-          </button>
+          <span className='secondary-text'>Уже есть аккаунт?</span>
+          <MyButton className='button-sign-in secondary-button auth' type="button" onClick={handleRedirect}>Войти</MyButton>
         </div>
       </div>
       <ItWorkSidebar />
