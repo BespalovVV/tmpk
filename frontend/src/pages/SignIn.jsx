@@ -1,16 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context";
 import axios from "axios";
 import Endpoint from "../API/Endpoints";
+import UserService from "../API/UserService";
 import ItWorkSidebar from "../components/ItWorkSidebar";
 import MyInput from "../components/UI/input/MyInput";
 import MyButton from "../components/UI/button/MyButton";
 import "../styles/Registration.css";
+import { useAuth } from "../context/AuthContext";
 
 const SignIn = () => {
-  const { setIsAuth } = useContext(AuthContext);
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -22,31 +23,47 @@ const SignIn = () => {
 
   const login = async (data) => {
     const URL = `${Endpoint.HOST}auth`;
-
+  
     const payload = {
-      login_or_email: data.login_or_email,
-      password: data.password,
-    };
+    login_or_email: data.login_or_email,
+    password: data.password,
+  };
 
     try {
       const response = await axios.post(URL, payload);
+      console.log("Ответ от сервера:", response.data);
 
       if (response.status === 200) {
-        setIsAuth(true);
+        const accessToken = response.data.access_token;
+        localStorage.setItem("access_token", accessToken);
+      
+        const decoded = JSON.parse(atob(accessToken.split('.')[1]));
+        const userRole = decoded?.user_role || "unknown_user";
+      
+        if (userRole === "unknown_user") {
+          alert("Ожидается подтверждение аккаунта. Доступ запрещен.");
+          return;
+        }
+        const userId = decoded?.user_id;
+        const userData = await UserService.getById(userId);
+      
+        const fullName = userData?.name || "Пользователь";
+      
         localStorage.setItem("auth", "true");
+        localStorage.setItem("username", fullName);
+        localStorage.setItem("user_role", userRole);
+      
+        setUser({ name: fullName, role: userRole });
         navigate("/mainpage");
-      } else {
-        throw new Error("Ошибка авторизации");
-      }
+      }      
     } catch (error) {
       console.error(error.response?.data || error);
-      setIsAuth(false);
       setErrorMessage("Неверный логин или пароль!");
     }
   };
 
   const handleRedirect = () => {
-      navigate('/signup');
+    navigate('/signup');
   };
 
   return (

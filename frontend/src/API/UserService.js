@@ -1,9 +1,23 @@
-import axios from "axios";
-import Endpoint from "./Endpoints";
+import api from "./axiosInstance";
 
-export default class UserService{
-    static async getAll(){
-        const response = await axios.get('http://127.0.0.1:8000/api/v1/users')
-        return response.data
-    }
+export default class UserService {
+  static async getAll() {
+    const res = await api.get("users");
+    return res.data;
+  }
+
+  static async getByLogin(login) {
+    const res = await api.get(`users/login/${login}`);
+    return res.data;
+  }
+
+  static async getByEmail(email) {
+    const res = await api.get(`users/email/${email}`);
+    return res.data;
+  }
+
+  static async getById(id) {
+    const res = await api.get(`/users/${id}`);
+    return res.data;
+  }  
 }

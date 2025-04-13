@@ -9,7 +9,7 @@ import Endpoint from "../API/Endpoints";
 import "../styles/Registration.css";
 
 const SignUp = () => {
-  const { register, formState: { errors, isValid }, handleSubmit, reset, watch } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, watch } = useForm({
     mode: "onBlur",
   });
   

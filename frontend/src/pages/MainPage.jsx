@@ -13,14 +13,6 @@ const MOCK_DATA = [
     deadline: "12.12.2012 12:00",
     createdAt: "11.11.2011"
   },
-  {
-    topic: "Тема",
-    fio: "Иванов Иван Иванович",
-    address: "г.Дубна, ул.Энтузиастов, 19/1, кв.18",
-    description: "Описание",
-    deadline: "12.12.2012 12:00",
-    createdAt: "11.11.2011"
-  },
 ];
 
 const MainPage = () => {
@@ -28,10 +20,11 @@ const MainPage = () => {
   const handleProfile = () => {
     navigate('/profile');
   };
+  const username = localStorage.getItem("username");
   return (
     <div className="main-page">
-        <div className='user' onClick={handleProfile}>
-          <span className="main-page__username">Иван Иванович</span>
+        <div className='user' onClick={handleProfile}> 
+          <span className="main-page__username">{username?.split(" ").slice(1).join(" ")}</span>
           <img className="arrow-more" alt="" src={arrowMore} />
         </div>
 
