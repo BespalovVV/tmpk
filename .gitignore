@@ -1,4 +1,10 @@
 .env
 .venv
 *.pyc
+/node_modules
+/build
+/.next
+/out
+/.cache
+/.vercel
 versions

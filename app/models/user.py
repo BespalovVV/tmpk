@@ -27,7 +27,8 @@ class Role(enum.Enum):
 
 class User(Base):
     __tablename__ = 'users'
-    
+    __table_args__ = {'extend_existing': True}
+
     id:Mapped[intpk]
     name:Mapped[str_128] = mapped_column(nullable=False)
     login: Mapped[str_64] = mapped_column(nullable=False, unique=True)
@@ -37,6 +38,7 @@ class User(Base):
     
 class Abonent(Base):
     __tablename__ = 'abonents'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     abon_name:Mapped[str_128] = mapped_column(nullable=False)
@@ -45,6 +47,7 @@ class Abonent(Base):
     
 class Port(Base):
     __tablename__ = 'ports'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     number:Mapped[int] = mapped_column(nullable=False)
@@ -54,6 +57,7 @@ class Port(Base):
     
 class Task(Base):
     __tablename__ = 'tasks'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     description:Mapped[str]
@@ -66,12 +70,14 @@ class Task(Base):
     
 class Service(Base):
     __tablename__ = 'services'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     name_service:Mapped[str_256] = mapped_column(nullable=False)
     
 class Switch(Base):
     __tablename__ = 'switches'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     name_com:Mapped[str_256] = mapped_column(nullable=False)
@@ -79,6 +85,7 @@ class Switch(Base):
     
 class Address(Base):
     __tablename__ = 'addresses'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     address:Mapped[str_256] = mapped_column(nullable=False)
@@ -87,6 +94,7 @@ class Address(Base):
     
 class Offer(Base):
     __tablename__ = 'offers'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     phone:Mapped[str] = mapped_column(String(10), nullable=False, unique=True)
@@ -98,6 +106,7 @@ class Offer(Base):
     
 class Offer_Service(Base):
     __tablename__ = 'offer_services'
+    __table_args__ = {'extend_existing': True}
     
     id:Mapped[intpk]
     offer_id:Mapped[int] = mapped_column(ForeignKey("offers.id", ondelete="CASCADE"), nullable=False)
