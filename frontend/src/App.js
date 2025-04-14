@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Layout from "./components/Layout";
 import MainLogo from "./components/MainLogo";
 import MyNavBar from "./components/UI/navBar/MyNavBar";
@@ -12,7 +11,6 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <AuthProvider>

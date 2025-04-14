@@ -1,12 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import MyButton from "../components/UI/button/MyButton";
 import MyInput from "../components/UI/input/MyInput";
 import { useNavigate } from "react-router-dom";
 import ItWorkSidebar from "../components/ItWorkSidebar";
-import Endpoint from "../API/Endpoints";
 import "../styles/Registration.css";
+import api from "../API/axiosInstance"
 
 const SignUp = () => {
   const { register, formState: { errors }, handleSubmit, reset, watch } = useForm({
@@ -27,10 +26,9 @@ const SignUp = () => {
       email: data.email,
     };
 
-    const URL = `${Endpoint.HOST}users`;
 
     try {
-      await axios.post(URL, payload);
+      await api.post('users', payload);
       localStorage.setItem("auth", "true");
       navigate("/signupsuccess");
       reset();
