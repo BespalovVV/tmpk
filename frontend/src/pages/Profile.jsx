@@ -9,17 +9,23 @@ import arrowMore from '../assets/arrow-more.png';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email")
+  const login = localStorage.getItem("login")
+  
+  const { setUser } = useAuth();
+
+
   const handleProfile = () => {
     navigate('/profile');
   };
-  const username = localStorage.getItem("username");
-  const { setUser } = useAuth();
-
   const handleLogout = () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("username");
     localStorage.removeItem("user_role");
     localStorage.removeItem("access_token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("login");
     setUser(null);
     navigate('/signin');
   };
@@ -29,11 +35,11 @@ const Profile = () => {
         <span className="main-page__username">{username?.split(" ").slice(1).join(" ")}</span>
           <img className="arrow-more" alt="" src={arrowMore} />
         </div>
-        <div className="profile-info">
-          <div className="info-blocks">
-            <InfoBlock header="Иванов Иван Иванович" body="worker2022@uni-dubna.ru"></InfoBlock>
-            <InfoBlock header="Логин" body="NewWorker22"></InfoBlock>
-            <InfoBlock header="Пароль" body="Password1!"></InfoBlock>
+        <div className='profile-info'>
+          <div className='info-blocks'>
+            <InfoBlock header={username?.split(" ").join(" ")} body={email}></InfoBlock>
+            <InfoBlock header='Логин' body={login}></InfoBlock>
+            <InfoBlock header='Пароль' body='Не безопасно хранить пароль в localStorage, я ХЗ. Идите подальше с такими предложениями'></InfoBlock>
           </div>
           <div className="buttons main-buttons">
             <MyButton type="button" onClick={handleLogout}>Выйти</MyButton>
