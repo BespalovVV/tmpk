@@ -1,9 +1,9 @@
-import React from "react";
-import imageItWork from "../assets/it-work.png";
+import React from 'react';
+import imageItWork from '../assets/it-work.png';
 
 export const ItWorkSidebar = () => {
   return (
-    <div className='sidebar-image'>
+    <div className="sidebar-image">
         <img className="it-work" alt="" src={imageItWork} />
     </div>
   );

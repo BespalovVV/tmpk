@@ -3,43 +3,43 @@
 }
   
 .main-page__header {
-    display: flex;
     align-items: center;
+    display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 20px;
 }
   
 .main-page__logo {
-    width: 36px;
     height: auto;
+    width: 36px;
 }
   
 .main-page__title {
     color: #1436e0;
-    text-transform: uppercase;
     font-size: 24px;
+    text-transform: uppercase;
 }
   
 .main-page__nav {
     display: flex;
-    gap: 20px;
-    font-size: 14px;
     flex-wrap: wrap;
+    font-size: 14px;
+    gap: 20px;
 }
   
 .main-page__username {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 16px;   
-    margin-top: auto;
+    margin-bottom: 16px;
     margin-bottom: auto;
+    margin-top: auto;
 }
   
 .main-page__cards {
     display: grid;
-    grid-template-columns: 1fr;
     gap: 20px;
+    grid-template-columns: 1fr;
 }
   
 @media screen and (min-width: 1024px) {
@@ -49,17 +49,17 @@
 }
 
 .main-page__bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background-color: #fff;
     border-top: 1px solid #eee;
+    bottom: 0;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
     font-size: 12px;
+    justify-content: space-around;
+    left: 0;
+    padding: 12px 0;
+    position: fixed;
+    right: 0;
 }
   
 .main-page__bottom-nav .active {
@@ -68,8 +68,8 @@
 }
  
 .user {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: 8px; 
     margin-bottom: 1em;
 }

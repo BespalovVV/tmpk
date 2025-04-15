@@ -1,4 +1,8 @@
 .main-wrapper {
+  background-color: var(--bluegradient);
+  box-sizing: border-box;
+  height: 100%;
+
   background: linear-gradient(
       196deg,
       rgba(20, 54, 224, 0.2) 0%,
@@ -8,38 +12,35 @@
       0deg,
       rgba(255, 255, 255, 1) 0%,
       rgba(255, 255, 255, 1) 100%
-    );
-  background-color: var(--bluegradient);
-  height: 100%;
-  box-sizing: border-box;
+  );
 }
 
 .content {
+  box-sizing: border-box;
+  height: 100%;
   padding-left: 6%;
   padding-right: 6%;
   padding-top: 2%;
-  height: 100%;
-  box-sizing: border-box;
 }
 
 .sidebar-image {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
 .it-work {
-  max-width: 100%;
   height: auto;
+  max-width: 100%;
 }
 
-@media screen and (max-width: 768px) {
-  .sidebar-image {
-    display: none;
-  }
-
+@media screen and (max-width: 767px) {
   .content {
     padding-top: 24px;
+  }
+
+  .sidebar-image {
+    display: none;
   }
 }
 

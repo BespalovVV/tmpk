@@ -1,6 +1,6 @@
-import React from "react";
-import "../styles/MainPage.css";
-import "../styles/InfoBlock.css";
+import React from 'react';
+import '../styles/MainPage.css';
+import '../styles/InfoBlock.css';
 
 const Profile = ({ header, body }) => {
     return (

@@ -1,19 +1,43 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .headline-tmpk {
         justify-content: center;
     }  
+
     .tmpk-text {
         display: none !important;
     }
 }
 
+@media screen and (min-width: 768px) {
+    .authorized-logo {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .tmpk-text {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .tmpk-text {
+        font-size: 22px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .tmpk-text {
+        font-size: 28px;
+    }
+}
+
 .tmpk-text {
-    font-size: 28px;
     color: #1436E0;
     text-transform: uppercase;
 }
 
 .headline-tmpk {
+    display: flex;
     gap: 16px;
 }
-  

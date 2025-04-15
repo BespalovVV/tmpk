@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Endpoint from "../API/Endpoints";
-import UserService from "../API/UserService";
-import ItWorkSidebar from "../components/ItWorkSidebar";
-import MyInput from "../components/UI/input/MyInput";
-import MyButton from "../components/UI/button/MyButton";
-import "../styles/Registration.css";
-import { useAuth } from "../context/AuthContext";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Endpoint from '../API/Endpoints';
+import UserService from '../API/UserService';
+import ItWorkSidebar from '../components/ItWorkSidebar';
+import MyInput from '../components/UI/input/MyInput';
+import MyButton from '../components/UI/button/MyButton';
+import '../styles/Registration.css';
+import { useAuth } from '../context/AuthContext';
 
 const SignIn = () => {
   const { setUser } = useAuth();
@@ -31,7 +31,6 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(URL, payload);
-      console.log("Ответ от сервера:", response.data);
 
       if (response.status === 200) {
         const accessToken = response.data.access_token;
@@ -54,7 +53,7 @@ const SignIn = () => {
         localStorage.setItem("user_role", userRole);
       
         setUser({ name: fullName, role: userRole });
-        navigate("/mainpage");
+        navigate('/mainpage');
       }      
     } catch (error) {
       console.error(error.response?.data || error);
@@ -125,8 +124,8 @@ const SignIn = () => {
         </form>
 
         <div className="to-sign-up">
-          <span className='secondary-text'>Нет аккаунта?</span>
-          <MyButton className='button-registration secondary-button auth' type="button" onClick={handleRedirect}>Создать аккаунт</MyButton>
+          <span className="secondary-text">Нет аккаунта?</span>
+          <MyButton className="button-registration secondary-button auth" type="button" onClick={handleRedirect}>Создать аккаунт</MyButton>
         </div>
       </div>
       <ItWorkSidebar />

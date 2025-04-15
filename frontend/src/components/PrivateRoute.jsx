@@ -1,12 +1,16 @@
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
 
-  if (!user) return <Navigate to="/signin" />;
+  if (isLoading) {
+    return null; 
+  }
+
+  if (!user) return <Navigate to='/signin' />;
   if (user.role !== "appruved_user" && user.role !== "admin") {
-    return <Navigate to="/signupsuccess" />;
+    return <Navigate to='/signupsuccess' />;
   }
 
   return children;

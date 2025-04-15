@@ -1,13 +1,13 @@
-import React from "react";
-import {  useNavigate } from "react-router-dom";
-import imageTmpkLogo from "../assets/tmpk-logo.png";
-import "../styles/MainLogo.css";
+import React from 'react';
+import {  useNavigate } from 'react-router-dom';
+import imageTmpkLogo from '../assets/tmpk-logo.png';
+import '../styles/MainLogo.css';
 
-export const MainLogo = () => {
+export const MainLogo = ({className = "", ...props}) => {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    if (!localStorage.getItem('auth')) {
+    if (!localStorage.getItem("auth")) {
       navigate('/signin');
     }
     else {
@@ -15,7 +15,7 @@ export const MainLogo = () => {
     }
   };
   return (
-    <div className="menu-header__item headline-tmpk" onClick={handleRedirect}>
+    <div className={`headline-tmpk ${className}`} onClick={handleRedirect}>
       <img className="menu-header__image tmpk-logo" alt="TMPK" src={imageTmpkLogo} />
       <div className="menu-header__text tmpk-text">Телеком МПК</div>
     </div> 

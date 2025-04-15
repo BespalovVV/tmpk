@@ -1,10 +1,6 @@
-.all-devices-text {
-    display: unset;
-}
-
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
     .to-sign-in-left {
-        text-align: left;
         align-items: start;
+        text-align: left;
     }
 }

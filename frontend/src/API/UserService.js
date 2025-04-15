@@ -1,4 +1,4 @@
-import api from "./axiosInstance";
+import api from './axiosInstance';
 
 export default class UserService {
   static async getAll() {

@@ -1,12 +1,12 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import MyButton from "../components/UI/button/MyButton";
-import MyInput from "../components/UI/input/MyInput";
-import { useNavigate } from "react-router-dom";
-import ItWorkSidebar from "../components/ItWorkSidebar";
-import Endpoint from "../API/Endpoints";
-import "../styles/Registration.css";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import MyButton from '../components/UI/button/MyButton';
+import MyInput from '../components/UI/input/MyInput';
+import { useNavigate } from 'react-router-dom';
+import ItWorkSidebar from '../components/ItWorkSidebar';
+import Endpoint from '../API/Endpoints';
+import '../styles/Registration.css';
 
 const SignUp = () => {
   const { register, formState: { errors }, handleSubmit, reset, watch } = useForm({
@@ -32,7 +32,7 @@ const SignUp = () => {
     try {
       await axios.post(URL, payload);
       localStorage.setItem("auth", "true");
-      navigate("/signupsuccess");
+      navigate('/signupsuccess');
       reset();
     } catch (e) {
         console.error(e.response?.data);
@@ -51,7 +51,7 @@ const SignUp = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="registration__inputs">
-          <div className='surname-input'>
+          <div className="surname-input">
             <MyInput
               {...register("surname", {
                 required: "Поле обязательно к заполнению",
@@ -172,8 +172,8 @@ const SignUp = () => {
         </form>
 
         <div className="to-sign-in">
-          <span className='secondary-text'>Уже есть аккаунт?</span>
-          <MyButton className='button-sign-in secondary-button auth' type="button" onClick={handleRedirect}>Войти</MyButton>
+          <span className="secondary-text">Уже есть аккаунт?</span>
+          <MyButton className="button-sign-in secondary-button auth" type="button" onClick={handleRedirect}>Войти</MyButton>
         </div>
       </div>
       <ItWorkSidebar />
