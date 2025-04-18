@@ -60,7 +60,7 @@ const MainPage = () => {
     <div className="main-page">
       <div className="user" onClick={handleProfile}>
         <span className="main-page__username">
-          {username?.split(" ").slice(1).join(" ")}
+        {username?.split(" ").slice(1).join(" ")}
         </span>
         <img className="arrow-more" alt="" src={arrowMore} />
       </div>

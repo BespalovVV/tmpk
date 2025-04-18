@@ -1,34 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UserService from "../API/UserService";
 import ItWorkSidebar from "../components/ItWorkSidebar";
 import MyInput from "../components/UI/input/MyInput";
 import MyButton from "../components/UI/button/MyButton";
 import "../styles/Registration.css";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import api from "../API/axiosInstance";
+import UserService from "../API/UserService"
 
 const SignIn = () => {
-  const { setUser } = useAuth();
+  const {setUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onBlur" });
+  const {register, handleSubmit,formState: { errors }} = useForm({ mode: "onBlur" });
+
 
   const login = async (data) => {
-    const payload = {
-      login_or_email: data.login_or_email,
-      password: data.password,
-    };
-  
+    const payload = {login_or_email: data.login_or_email,password: data.password}
+    
     try {
       const response = await api.post("auth", payload);
-  
       if (response.status === 200) {
         const accessToken = response.data.access_token;
         localStorage.setItem("access_token", accessToken);
@@ -40,6 +33,7 @@ const SignIn = () => {
         const fullName = userData?.name || "Пользователь";
   
         localStorage.setItem("auth", "true");
+        localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("username", fullName);
         localStorage.setItem("user_role", userRole);
         localStorage.setItem("user_id", userId);
@@ -54,6 +48,7 @@ const SignIn = () => {
       setErrorMessage("Неверный логин или пароль!");
     }
   };
+  
   
 
   const handleRedirect = () => {
