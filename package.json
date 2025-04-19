@@ -5,7 +5,7 @@
   },
   "scripts": {
     "start:backend": "uvicorn backend.main:app --reload",
-    "start:frontend": "npm start --prefix frontend --port 3001",
+    "start:frontend": "npm start --prefix frontend",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   }
 }
