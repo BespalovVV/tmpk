@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import ItWorkSidebar from "../components/ItWorkSidebar";
-import MyInput from "../components/UI/input/MyInput";
-import MyButton from "../components/UI/button/MyButton";
-import "../styles/Registration.css";
-import { AuthContext } from "../context/AuthContext";
-import api from "../API/axiosInstance";
-import UserService from "../API/UserService"
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import ItWorkSidebar from '../components/ItWorkSidebar';
+import MyInput from '../components/UI/input/MyInput';
+import MyButton from '../components/UI/button/MyButton';
+import '../styles/Registration.css';
+import { AuthContext } from '../context/AuthContext';
+import api from '../API/axiosInstance';
+import UserService from '../API/UserService'
 
 const SignIn = () => {
   const {setUser} = useContext(AuthContext);

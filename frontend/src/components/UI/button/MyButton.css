@@ -45,3 +45,13 @@
 .main-buttons {
     text-align: center;
 }
+
+.button-toggle {
+    border: 1px solid #666666;
+    box-shadow: none;
+}
+
+.button-toggle_active {
+    border: 1px solid #1436E0;
+    box-shadow: none;
+}

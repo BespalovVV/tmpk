@@ -86,9 +86,14 @@
 }
 
 .menu__logo {
-    display: contents;
+    flex-direction: unset;
+    flex-wrap: unset;
 }
 
 .not-seperated {
     display: inline-block;
+}
+
+.menu-header__text_active {
+    color: #1436E0;
 }
