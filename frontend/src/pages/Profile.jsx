@@ -39,7 +39,7 @@ const Profile = () => {
           <div className='info-blocks'>
             <InfoBlock header={username?.split(" ").join(" ")} body={email}></InfoBlock>
             <InfoBlock header='Логин' body={login}></InfoBlock>
-            <InfoBlock header='Пароль' body='Не безопасно хранить пароль в localStorage, я ХЗ. Идите подальше с такими предложениями'></InfoBlock>
+            <InfoBlock header='Пароль' body='Не безопасно хранить пароль в localStorage, я ХЗ.'></InfoBlock>
           </div>
           <div className="buttons main-buttons">
             <MyButton type="button" onClick={handleLogout}>Выйти</MyButton>

@@ -48,11 +48,13 @@ const SignIn = () => {
       setErrorMessage("Неверный логин или пароль!");
     }
   };
-  
-  
 
   const handleRedirect = () => {
     navigate('/signup');
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgotpassword');
   };
 
   return (
@@ -105,7 +107,7 @@ const SignIn = () => {
               <input type="checkbox" id="remember-me__input" />
               <label htmlFor="remember-me__input">Запомнить меня</label>
             </div>
-            <div className="forgot-password">Забыли пароль?</div>
+            <div className="forgot-password" onClick={handleForgotPassword}>Забыли пароль?</div>
           </div>
 
           <div className="buttons">

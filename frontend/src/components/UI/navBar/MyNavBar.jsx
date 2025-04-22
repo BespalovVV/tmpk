@@ -41,8 +41,8 @@ export const NavBar = ({children}) => {
         </div>
 
         <div className="menu-header__item home-header" onClick={() => navigate('/mainpage')}>
-            <img className="menu-header__image menu-image" alt="" src={isActive('/mainpage') ? HomeBlue : HomeGrey} />
-            <div className={`menu-header__text ${isActive('/mainpage') ? "menu-header__text_active" : ""}`}>
+            <img className="menu-header__image menu-image" alt="" src={isActive('/mainpage') || isActive('/profile') ? HomeBlue : HomeGrey} />
+            <div className={`menu-header__text ${isActive('/mainpage') || isActive('/profile') ? "menu-header__text_active" : ""}`}>
                 <span>Главная</span>
             </div>
         </div>

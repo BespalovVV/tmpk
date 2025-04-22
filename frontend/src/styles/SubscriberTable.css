@@ -1,0 +1,41 @@
+.subscriber-table {
+    width: 100%;
+    overflow-x: auto;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+  
+th, td {
+    border-bottom: 1px solid #EFEFEF;
+    padding: 10px;
+    text-align: center;
+    vertical-align: top;
+}
+  
+thead {
+    border-bottom: 2px solid #1436E0;
+}
+  
+.address-column {
+    white-space: pre-line;
+}
+  
+.services-list {
+    list-style-type: disc;
+    padding-left: 16px;
+    margin: 0;
+}
+  
+.td-list {
+    text-align: left;
+}
+
+.options-buttons {
+    display: flex;
+    gap: 48px;
+    justify-content: space-around;
+}
