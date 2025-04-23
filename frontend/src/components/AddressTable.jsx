@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/SubscriberTable.css'; 
+import '../styles/SearchTables.css'; 
 import MyButton from './UI/button/MyButton';
 
 const SubscriberTable = ({ data }) => {
@@ -33,43 +33,43 @@ const SubscriberTable = ({ data }) => {
                     <table className="details-table">
                       <thead>
                       <tr>
-                          <th>Статус</th>
-                          <th>Телефон</th>
-                          <th>Подключенные услуги</th>
-                          <th>Наименование коммутатора</th>
-                          <th>IP-адрес коммутатора</th>
-                          <th>Номер порта</th>
+                        <th>Статус</th>
+                        <th>Телефон</th>
+                        <th>Подключенные услуги</th>
+                        <th>Наименование коммутатора</th>
+                        <th>IP-адрес коммутатора</th>
+                        <th>Номер порта</th>
                       </tr>
                       </thead>
 
                       <tbody>
                       <tr>
-                          <td>{sub.status}</td>
-                          <td>{sub.phone}</td>
-                          <td className='td-list'>
+                        <td>{sub.status}</td>
+                        <td>{sub.phone}</td>
+                        <td className='td-list'>
                           <ul className="services-list">
-                              {sub.services.map((service, index) => (
+                            {sub.services.map((service, index) => (
                               <li key={index}>{service}</li>
-                              ))}
+                            ))}
                           </ul>
-                          </td>
-                          <td>{sub.switchName}</td>
-                          <td>{sub.switchIp}</td>
-                          <td>{sub.portNumber}</td>
+                        </td>
+                        <td>{sub.switchName}</td>
+                        <td>{sub.switchIp}</td>
+                        <td>{sub.portNumber}</td>
                       </tr>
                       <tr className="buttons-row">
                         <td colSpan="6">
                           <div className="buttons options-buttons action-buttons" colSpan="100%">
-                              <MyButton className="primary-button" type="button">Ethernet</MyButton>
-                              <MyButton className="primary-button" type="button">Получить ссылки на задачи по абоненту в Битрикс24</MyButton>
-                              <MyButton className="primary-button" type="button">Оплата СБП</MyButton>
+                            <MyButton className="primary-button" type="button">Ethernet</MyButton>
+                            <MyButton className="primary-button" type="button">Получить ссылки на задачи по абоненту в Битрикс24</MyButton>
+                            <MyButton className="primary-button" type="button">Оплата СБП</MyButton>
                           </div>
                         </td>
                       </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
               )}
             </React.Fragment>
           ))}

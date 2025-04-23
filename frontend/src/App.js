@@ -16,13 +16,18 @@ import Switchers from './pages/Switchers';
 import Tasks from './pages/Tasks';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import { useAuth } from './context/AuthContext';
+
 
 function App() {
+  const { user, isLoading } = useAuth();
+  if (isLoading) return null;
+
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/signin" />} />
+          <Route path="/" element={<Navigate to={user ? "/mainpage" : "/signin"} />} />
           <Route path="/signin" element={<Layout><MainLogo/><SignIn/></Layout>} />
           <Route path="/signup" element={<Layout><MainLogo/><SignUp/></Layout>} />
           <Route path="/forgotpassword" element={<Layout><MainLogo/><ForgotPassword/></Layout>} />

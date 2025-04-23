@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MyButton from '../components/UI/button/MyButton';
 import MySearch from '../components/UI/search/MySearch';
 import '../styles/Switchers.css';
+import SwitcherTable from '../components/SwitcherTable'
 
 const Switchers = () => {
   const [activeSearch, setActiveSearch] = useState('ip'); 
@@ -33,6 +34,12 @@ const Switchers = () => {
       {activeSearch === 'address' && (
         <MySearch placeholder="Введите фактический адрес" />
       )}
+
+      <SwitcherTable 
+        switchName='TL'
+        switchIp='127.000.00.00'
+        portNumbers={["2", "6"]}
+      />
     </div>
   );
 };
