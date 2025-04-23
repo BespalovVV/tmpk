@@ -43,7 +43,7 @@ const SubscriberTable = ({
             </tbody>
         </table>
 
-        <div className="buttons options-buttons">
+        <div className="options-buttons">
             <MyButton className="primary-button" type="button">Ethernet</MyButton>
             <MyButton className="primary-button" type="button">Получить ссылки на задачи по абоненту в Битрикс24</MyButton>
             <MyButton className="primary-button" type="button">Оплата СБП</MyButton>
