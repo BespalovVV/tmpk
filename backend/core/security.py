@@ -1,3 +1,5 @@
+from typing import Optional
+from jose import JWTError
 import jwt
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -89,3 +91,44 @@ def get_hashed_password(password: str) -> str:
 def verify_password(password: str, hashed_pass: str) -> bool:
     salt_password = str(password + salt)
     return password_context.verify(salt_password, hashed_pass)
+
+async def create_reset_password_token(email: str):
+    data = {
+        "sub": email,
+        "exp": datetime.now() + timedelta(minutes=10)
+    }
+    token = jwt.encode(data, secret_key, algorithm='HS256')
+    return token
+
+def decode_reset_password_token(token: str):
+    try:
+        payload = jwt.decode(
+            token, 
+            settings.SECRET_KEY, 
+            algorithms=["HS256"]
+        )
+        email: str = payload.get("sub")
+        return email
+    except JWTError:
+        return None
+    
+async def create_confirmation_token(email: str) -> str:
+    data = {
+        "sub": email,
+        "exp": datetime.now() + timedelta(minutes=10)
+    }
+    token = jwt.encode(data, secret_key, algorithm='HS256')
+    return token
+
+async def verify_confirmation_token(token: str) -> Optional[str]:
+    try:
+        payload = jwt.decode(
+            token, 
+            settings.SECRET_KEY, 
+            algorithms=["HS256"]
+        )
+        email: str = payload.get("sub")
+        return email
+    except JWTError:
+        return None
+    

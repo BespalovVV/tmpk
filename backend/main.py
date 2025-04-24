@@ -9,6 +9,7 @@ from .api.v1.service import router as servicerouter
 from .api.v1.port import router as portrouter
 from .api.v1.task import router as taskrouter
 from .api.v1.auth import router as authrouter
+from .api.v1.reset_pass import router as reset_passrouter
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -22,6 +23,7 @@ app.include_router(servicerouter, prefix="/api/v1")
 app.include_router(portrouter, prefix="/api/v1")
 app.include_router(taskrouter, prefix="/api/v1")
 app.include_router(authrouter, prefix="/api/v1")
+app.include_router(reset_passrouter, prefix="/api/v1")
 
 origins = [
     "http://localhost",

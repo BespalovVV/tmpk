@@ -29,8 +29,8 @@ const SignUp = () => {
 
     try {
       await api.post('users', payload);
-      localStorage.setItem("auth", "true");
-      navigate('/signupsuccess');
+      await api.post('send-confirmation-email', data={"email": data.email})
+      navigate('/confirmation', {state: {email: data.email}});
       reset();
     } catch (e) {
         console.error(e.response?.data);

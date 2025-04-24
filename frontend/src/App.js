@@ -13,6 +13,8 @@ import Switchers from './pages/Switchers';
 import Tasks from './pages/Tasks';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import EmailConfirmationMessage from './pages/confirmationEmail';
+import EmailConfirmationPage from './pages/EmailConfirmationPage';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
           <Route path="/addresses" element={<PrivateRoute><Layout><MainLogo className="authorized-logo"/><MyNavBar/><Addresses /></Layout></PrivateRoute>} />
           <Route path="/switchers" element={<PrivateRoute><Layout><MainLogo className="authorized-logo"/><MyNavBar/><Switchers /></Layout></PrivateRoute>} />
           <Route path="/tasks" element={<PrivateRoute><Layout><MainLogo className="authorized-logo"/><MyNavBar/><Tasks /></Layout></PrivateRoute>} />
+          <Route path="/confirmation" element={<Layout><MainLogo/><EmailConfirmationMessage/></Layout>} />
+          <Route path="/confirm-email/:token" element={<Layout><MainLogo/><EmailConfirmationPage/></Layout>} />
         </Routes>
       </Router>
     </AuthProvider>

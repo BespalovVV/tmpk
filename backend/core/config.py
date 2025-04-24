@@ -1,3 +1,4 @@
+from pydantic import EmailStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
@@ -8,7 +9,17 @@ class Settings(BaseSettings):
     DB_NAME: str
     SALT: str
     SECRET_KEY: str
-    
+    APP_HOST: str
+    FORGET_PASSWORD_URL: str
+    EMAIL_CONFIRMATION_URL: str
+    MAIL_FROM: EmailStr
+    MAIL_FROM_NAME: str
+    MAIL_PASSWORD: str
+    MAIL_PORT: int
+    MAIL_SERVER: str
+    MAIL_TLS: bool = True
+    MAIL_SSL: bool = False
+    MAIL_HOST_PASSWORD: str
     @property
     def DATABASE_URL_asyncpg(self):
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"

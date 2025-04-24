@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from ...core.security import get_current_user
-from ...models.user import User
 from ...crud import user as UserService
 from ...db.session import get_session
-from ...schemas.user import UserCreate, UserUpdate, UserResponse
+from ...schemas.user import UserCreate, UserUpdate, UserResponse, UserNotif
+from ...core.email_notification import confirm_email
 
 router = APIRouter()
 
@@ -41,3 +41,8 @@ async def delete_user(user_id: int, db: AsyncSession = Depends(get_session), cur
         return await UserService.delete_user(user_id, db)
     else:
         raise HTTPException(status_code=401, detail="Недостаточно прав")
+    
+@router.post('/users/reg', tags=["Пользователи"], summary="отправка сообщения")
+async def delete_user(data: UserNotif, db: AsyncSession = Depends(get_session)):
+        return await confirm_email(data=data, db=db)
+    

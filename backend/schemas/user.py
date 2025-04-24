@@ -43,3 +43,9 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class UserNotif(BaseModel):
+    email: EmailStr
+
+    class Config:
+        from_attributes = True

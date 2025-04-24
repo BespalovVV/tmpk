@@ -77,6 +77,32 @@ async def update_user(user_id: int, data: UserUpdate, db: AsyncSession) -> User:
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при обновлении пользователя: {str(e)}")
 
+async def update_user_password(email: str, new_password: str, db: AsyncSession) -> User:
+    try:
+        async with db.begin():
+            result = await db.execute(select(User).filter(User.email == email))
+            user = result.scalar_one_or_none()
+            if not user:
+                raise Exception("Пользователь не найден")
+            if new_password:
+                user.password = new_password
+            return user
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Ошибка при обновлении пользователя: {str(e)}")
+async def update_email_verification_status(email: str, db: AsyncSession) -> User:
+    try:
+        if db.in_transaction():
+            await db.rollback()
+        async with db.begin():
+            result = await db.execute(select(User).filter(User.email == email))
+            user = result.scalar_one_or_none()
+            if not user:
+                raise Exception("Пользователь не найден")
+            user.role = "appruved_user"
+            return user
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Ошибка при подтверждении Email пользователя: {str(e)}")
+
 async def delete_user(user_id: int, db: AsyncSession) -> bool:
     try:
         async with db.begin():
