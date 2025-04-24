@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from fastapi import HTTPException
@@ -73,3 +74,15 @@ async def delete_service(service_id: int, db: AsyncSession) -> bool:
         return True
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при удалении сервиса: {str(e)}")
+async def get_services_by_offer_id(offer_id: int, db: AsyncSession) -> list[Any]:
+    try:
+        offer = await get_offer_by_id(offer_id, db)
+        if not offer:
+            raise Exception("Договор не найден")
+        result = await db.execute(select(Offer_Service.service_id).filter(Offer_Service.offer_id == offer_id))
+        services = result.scalars().all()
+        if not services:
+            raise Exception("Услуги не найдены")
+        return services
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Ошибка при получении сервиса: {str(e)}") 

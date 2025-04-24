@@ -1,6 +1,6 @@
-import React from "react";
-import "../styles/Card.css";
-import {formatDateTime, formatDate} from "../utils/dateUtil";
+import React from 'react';
+import '../styles/Card.css';
+import {formatDateTime, formatDate} from '../utils/dateUtil';
 
 
 const Card = ({ topic, fio, address, description, date_to, date_creation }) => {

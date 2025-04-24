@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import "../styles/MainPage.css";
-import Card from "../components/Card";
-import { useNavigate } from "react-router-dom";
-import arrowMore from "../assets/arrow-more.png";
-import TaskService from "../API/TaskService";
-import OffersService from "../API/OffersService";
-import AddressService from "../API/AddressService";
+import React, { useEffect, useState } from 'react';
+import '../styles/MainPage.css';
+import Card from '../components/Card';
+import { useNavigate } from 'react-router-dom';
+import arrowMore from '../assets/arrow-more.png';
+import TaskService from '../API/TaskService';
+import OffersService from '../API/OffersService';
+import AddressService from '../API/AddressService';
 
 const MainPage = () => {
   const navigate = useNavigate();

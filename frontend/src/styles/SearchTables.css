@@ -1,0 +1,87 @@
+.subscriber-table, .details-table {
+  width: 100%;
+  overflow-x: auto;
+}
+  
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+  
+th, td {
+  border-bottom: 1px solid #EFEFEF;
+  padding: 12px;
+  text-align: center;
+}
+  
+thead {
+  font-size: 16px;
+  border-bottom: 2px solid #1436E0;
+}
+  
+.address-column {
+  white-space: pre-line;
+}
+  
+.services-list {
+  list-style-type: disc;
+  padding-left: 16px;
+  margin: 0;
+}
+  
+.td-list {
+  text-align: left;
+}
+
+.options-buttons {
+  display: flex;
+  gap: 48px;
+  justify-content: space-around;
+  margin: 24px 0;
+}
+
+.options-buttons .primary-button {
+  flex: 1;
+  min-width: 0;
+}
+
+.details-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  white-space: wrap;
+  font-weight: lighter;
+}
+  
+.details-table th,.details-table td, .details-table thead {
+  border: none;
+}
+
+.details-table thead tr th {
+  font-size: 14px;
+  font-weight: normal !important;
+}
+
+.subscriber-table .summary-row td {
+  border-bottom: 1px solid #EFEFEF;
+}
+  
+.subscriber-table .summary-row.no-border td {
+  border-bottom: none;
+}
+
+.details-table {
+  margin-top: 48px;
+}
+  
+  /*
+table {
+  transform:rotate(270deg);  
+}
+table th, table td{
+  transform:rotate(90deg);
+}
+td {
+  height: 50px;
+}
+  */

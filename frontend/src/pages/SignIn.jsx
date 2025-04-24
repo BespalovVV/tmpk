@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import ItWorkSidebar from "../components/ItWorkSidebar";
-import MyInput from "../components/UI/input/MyInput";
-import MyButton from "../components/UI/button/MyButton";
-import "../styles/Registration.css";
-import { AuthContext } from "../context/AuthContext";
-import api from "../API/axiosInstance";
-import UserService from "../API/UserService"
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import ItWorkSidebar from '../components/ItWorkSidebar';
+import MyInput from '../components/UI/input/MyInput';
+import MyButton from '../components/UI/button/MyButton';
+import '../styles/Registration.css';
+import { AuthContext } from '../context/AuthContext';
+import api from '../API/axiosInstance';
+import UserService from '../API/UserService'
 
 const SignIn = () => {
   const {setUser} = useContext(AuthContext);
@@ -15,7 +15,6 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const {register, handleSubmit,formState: { errors }} = useForm({ mode: "onBlur" });
-
 
   const login = async (data) => {
     const payload = {login_or_email: data.login_or_email,password: data.password}
@@ -48,11 +47,13 @@ const SignIn = () => {
       setErrorMessage("Неверный логин или пароль!");
     }
   };
-  
-  
 
   const handleRedirect = () => {
     navigate('/signup');
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgotpassword');
   };
 
   return (
@@ -105,7 +106,7 @@ const SignIn = () => {
               <input type="checkbox" id="remember-me__input" />
               <label htmlFor="remember-me__input">Запомнить меня</label>
             </div>
-            <div className="forgot-password">Забыли пароль?</div>
+            <div className="forgot-password" onClick={handleForgotPassword}>Забыли пароль?</div>
           </div>
 
           <div className="buttons">

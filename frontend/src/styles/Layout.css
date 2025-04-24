@@ -52,3 +52,7 @@
 .sidebar-image {
   width: 50%;
 }
+
+.abonents-page, .addresses-page, .main-page, .switchers-page, .tasks-page {
+  padding: 20px;
+}

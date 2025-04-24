@@ -12,18 +12,18 @@ export const SignUpSuccess = () => {
   };
   return (
     <div className="registration-page">
-        <div className="registration">
-            <div className="registration__message">
-                <p className="main-message">Спасибо за регистрацию</p>
-                <p className="additional-message secondary-text all-devices-text">Пожалуйста, дождитесь подтверждения аккаунта. Обычно это занимает не более 24 часов</p>
-            </div>
+      <div className="registration">
+        <div className="registration__message">
+          <p className="main-message">Спасибо за регистрацию</p>
+          <p className="additional-message secondary-text all-devices-text">Пожалуйста, дождитесь подтверждения аккаунта. Обычно это занимает не более 24 часов</p>
+        </div>
 
-            <div className="to-sign-in to-sign-in-left">
+        <div className="to-sign-in to-sign-in-left">
           <span className="secondary-text">Уже есть аккаунт?</span>
           <MyButton className="button-sign-in secondary-button auth" type="button" onClick={handleRedirect}>Войти</MyButton>
         </div>
-        </div>
-        <ItWorkSidebar/>
+      </div>
+      <ItWorkSidebar/>
     </div>
   );
 };
