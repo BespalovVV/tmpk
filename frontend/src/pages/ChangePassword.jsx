@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import MyInput from '../components/UI/input/MyInput';
 
 export const ChangePassword = () => {
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const navigate = useNavigate();
   
   const onSubmit = async (data) => {
@@ -20,13 +20,13 @@ export const ChangePassword = () => {
 
   return (
     <div className="registration-page">
-    <div className="registration">
+      <div className="registration">
         <div className="registration__message">
             <p className="additional-message secondary-text all-devices-text">Смените пароль</p>
         </div>
 
         <form className="registration__inputs" onSubmit={handleSubmit(onSubmit)}>
-        <div className="password-input">
+          <div className="password-input">
             <MyInput
               label="Пароль"
               type="password"
@@ -52,8 +52,8 @@ export const ChangePassword = () => {
             <MyButton className="button-registration primary-button auth" type="submit">Сменить пароль</MyButton>
           </div>
         </form>
-    </div>
-        <ItWorkSidebar/>
+      </div>
+      <ItWorkSidebar/>
     </div>
   );
 };

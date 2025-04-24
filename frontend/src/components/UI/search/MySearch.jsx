@@ -25,6 +25,7 @@ const SearchInput = ({ placeholder = "Введите ", onSearch }) => {
       <button className="icon-button search-icon" onClick={handleSearch}>
         <FiSearch size={18} />
       </button>
+
       <input
         type="text"
         value={value}
@@ -33,6 +34,7 @@ const SearchInput = ({ placeholder = "Введите ", onSearch }) => {
         placeholder={placeholder}
         className="search-input"
       />
+      
       {value && (
         <button className="icon-button" onClick={handleClear}>
           <FiX size={18} />

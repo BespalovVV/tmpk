@@ -16,7 +16,6 @@ const SignIn = () => {
 
   const {register, handleSubmit,formState: { errors }} = useForm({ mode: "onBlur" });
 
-
   const login = async (data) => {
     const payload = {login_or_email: data.login_or_email,password: data.password}
     
