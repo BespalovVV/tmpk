@@ -6,7 +6,7 @@ import SwitchService from '../API/SwitchService';
 import AddressService from '../API/AddressService';
 import AbonentService from '../API/AbonentService';
 import PortService from '../API/PortService.js';
-import Offers_sService from '../API/Offers_sService.js';
+import ServiceService from '../API/ServiceService.js';
 import formatPhone from '../utils/formatPh.js'
 
 const Abonents = () => {
@@ -25,26 +25,28 @@ const Abonents = () => {
         const switches = await SwitchService.getById(address.com_id)
         const ports = await PortService.getAll()
         const port = ports.find((p) => p.switch_id === address.com_id)
-        const services = await Offers_sService.getAll()
-        const service = services.find((p) => p)
+        const servicesIds = await ServiceService.getByIdOf(data.id)
+        const services = [];
+        for (let id of servicesIds) {
+          const service = await ServiceService.getById(id);
+          services.push(service.name_service);
+        }
 
         setSubscriber({
           id: data.id,
-          status: port.status_link || 'Статус неизвестен',
+          status: abon.status || 'Статус неизвестен',
           fullName: data.abon_name,
           address: address.address,
           phone: formatPhone(data.phone),
-          services: data.services || ['-'],
+          services: services.length ? services : ['—'],
           switchName: switches.name_com || '—',
           switchIp: switches.IP || '—',
           portNumber: port.number || '—',
         });
       } else if (/^\d{1,3}(\.\d{1,3}){3}$/.test(query)) {
         const sw = await SwitchService.getByIp(query);
-        console.log(sw)
         const allAddresses = await AddressService.getAll();
         const address = allAddresses.find(a => a.com_id === sw.id);
-  
         if (!address) {
           setError('Нет адресов, подключённых к этому коммутатору');
           return;
@@ -57,6 +59,13 @@ const Abonents = () => {
           setError('Не найден договор по IP-адресу');
           return;
         }
+        const abon = await AbonentService.getById(offer.abon_id);
+        const servicesIds = await ServiceService.getByIdOf(offer.id)
+        const services = [];
+        for (let id of servicesIds) {
+          const service = await ServiceService.getById(id);
+          services.push(service.name_service);
+        }
   
         const ports = await PortService.getAll();
         const port = ports.find((p) => p.switch_id === sw.id);
@@ -64,11 +73,11 @@ const Abonents = () => {
   
         setSubscriber({
           id: offer.id,
-          status: port?.status_link || 'Статус неизвестен',
+          status: abon.status || 'Статус неизвестен',
           fullName: offer.abon_name,
           address: address.address,
           phone: formatPhone(offer.phone),
-          services:  ['—'],
+          services: services.length ? services : ['—'],
           switchName: sw.name_com || '—',
           switchIp: sw.IP || '—',
           portNumber: port?.number || '—',
