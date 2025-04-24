@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from crud import service as ServiceService
@@ -29,3 +29,6 @@ async def delete_service_handler(service_id: int, db: AsyncSession = Depends(get
     if success:
         return {"msg": "Услуга удалена"}
     raise HTTPException(status_code=404, detail="Услуга не найдена")
+@router.get("/services-for-offer/{offer_id}", response_model=List[Any], summary="Получение ID услуг по договору", tags=["Услуги"])
+async def get_service_by_id_handler(offer_id: int, db: AsyncSession = Depends(get_session)):
+    return await ServiceService.get_services_by_offer_id(offer_id, db)
