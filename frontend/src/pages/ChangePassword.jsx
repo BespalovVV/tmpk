@@ -3,18 +3,21 @@ import { useForm } from 'react-hook-form';
 import '../styles/Registration.css';
 import ItWorkSidebar from '../components/ItWorkSidebar';
 import MyButton from '../components/UI/button/MyButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MyInput from '../components/UI/input/MyInput';
+import api from '../API/axiosInstance';
 
 export const ChangePassword = () => {
-  const { handleSubmit } = useForm();
+  const { register,  handleSubmit } = useForm();
   const navigate = useNavigate();
+  const { token } = useParams();
   
   const onSubmit = async (data) => {
     try {
+      await api.post(`reset-forget-password/`, {"secret_token": token, "new_password": data.new_password, "confirm_password": data.confirm_password})
       navigate('/signin');
     } catch (error) {
-      console.error("Ошибка при сбросе пароля", error);
+      console.error("Ошибка при смене пароля", error);
     }
   };
 
@@ -34,6 +37,13 @@ export const ChangePassword = () => {
               id="password"
               name="password"
               autoComplete="new-password"
+              {...register("new_password", {
+                required: 'Обязательное поле',
+                minLength: {
+                  value: 8,
+                  message: 'Минимум 8 символов'
+                }
+              })}
             />
           </div>
 
@@ -45,6 +55,13 @@ export const ChangePassword = () => {
               id="confirmPassword"
               name="confirmPassword"
               autoComplete="current-password"
+              {...register("confirm_password", {
+                required: 'Обязательное поле',
+                minLength: {
+                  value: 8,
+                  message: 'Минимум 8 символов'
+                }
+              })}
             />
           </div>
           

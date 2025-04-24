@@ -34,7 +34,7 @@ function App() {
           <Route path="/signup" element={<Layout><MainLogo/><SignUp/></Layout>} />
           <Route path="/forgotpassword" element={<Layout><MainLogo/><ForgotPassword/></Layout>} />
           <Route path="/signupsuccess" element={<Layout><MainLogo/><SignUpSuccess /></Layout>} />
-          <Route path="/changepassword" element={<Layout><MainLogo/><ChangePassword /></Layout>} />
+          <Route path="/reset-password/:token" element={<Layout><MainLogo/><ChangePassword /></Layout>} />
           <Route path="/waitingpassword" element={<Layout><MainLogo/><WaitingPassword /></Layout>} />
           <Route path="/mainpage" element={<PrivateRoute><Layout><MainLogo className="authorized-logo"/><MyNavBar/><MainPage /></Layout></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Layout><MainLogo className="authorized-logo"/><MyNavBar/><Profile /></Layout></PrivateRoute>} />

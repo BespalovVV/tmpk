@@ -83,7 +83,7 @@ async def update_tokens(response: Response, db: AsyncSession, current_user: dict
 password_context = CryptContext(schemes=["sha256_crypt"], deprecated="auto")
 
 
-def get_hashed_password(password: str) -> str:
+async def get_hashed_password(password: str) -> str:
     salt_password = str(password + salt)
     return password_context.hash(salt_password)
 

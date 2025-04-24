@@ -5,9 +5,10 @@ import ItWorkSidebar from '../components/ItWorkSidebar';
 import MyButton from '../components/UI/button/MyButton';
 import { useNavigate } from 'react-router-dom';
 import MyInput from '../components/UI/input/MyInput';
+import api from '../API/axiosInstance';
 
 export const ForgotPassword = () => {
-  const {handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const handleRedirect = () => {
@@ -16,6 +17,7 @@ export const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     try {
+      await api.post(`forget-password`, data)
       navigate('/waitingpassword');
     } catch (error) {
       console.error("Ошибка при отправке письма", error);
@@ -37,6 +39,13 @@ export const ForgotPassword = () => {
               placeholder="Введите email"
               type="text"
               label="Email"
+              {...register("email", {
+                required: "Поле обязательно к заполнению",
+                pattern: {
+                  value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                  message: "Некорректный email",
+                },
+              })}
             />
           </div>
           <div className="buttons">

@@ -3,12 +3,14 @@ from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
+
+from ..schemas.pass_reset import SuccessMessage
 from ..core.security import get_hashed_password
 from ..models.user import User
 from ..schemas.user import UserCreate, UserUpdate
 
 async def create_user(data: UserCreate, db: AsyncSession) -> User:
-    hashed_password = get_hashed_password(data.password)
+    hashed_password = await get_hashed_password(data.password)
     user = User(name=data.name, login=data.login, password=hashed_password, email=data.email)
     try:
         db.add(user)
@@ -77,18 +79,38 @@ async def update_user(user_id: int, data: UserUpdate, db: AsyncSession) -> User:
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при обновлении пользователя: {str(e)}")
 
-async def update_user_password(email: str, new_password: str, db: AsyncSession) -> User:
+async def update_user_password(email: str, new_password: str, db: AsyncSession) -> SuccessMessage:
     try:
+        if db.in_transaction():
+            await db.rollback()
         async with db.begin():
-            result = await db.execute(select(User).filter(User.email == email))
+            stmt = select(User).where(User.email == email)
+            result = await db.execute(stmt)
             user = result.scalar_one_or_none()
+            
             if not user:
-                raise Exception("Пользователь не найден")
-            if new_password:
-                user.password = new_password
-            return user
+                raise HTTPException(
+                    status_code=404,
+                    detail="Пользователь с указанным email не найден"
+                )
+            
+            user.password = new_password
+            await db.commit()
+            
+            return SuccessMessage(
+                success=True,
+                status_code=200,
+                message="Пароль успешно обновлен"
+            )
+            
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Ошибка при обновлении пользователя: {str(e)}")
+        await db.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ошибка при обновлении пароля: {str(e)}"
+        )
 async def update_email_verification_status(email: str, db: AsyncSession) -> User:
     try:
         if db.in_transaction():
