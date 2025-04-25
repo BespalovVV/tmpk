@@ -30,7 +30,7 @@ const SignUp = () => {
     try {
       await api.post('users', payload);
       await api.post('send-confirmation-email', data={"email": data.email})
-      navigate('/confirmation', {state: {email: data.email}});
+      navigate('/confirmation', {state: {email: data.email, login: data.login}});
       reset();
     } catch (e) {
         console.error(e.response?.data);

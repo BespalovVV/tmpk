@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ...core.security import get_current_user
 from ...crud import user as UserService
 from ...db.session import get_session
-from ...schemas.user import UserCreate, UserUpdate, UserResponse, UserNotif
+from ...schemas.user import UserCreate, UserEmailUpdate, UserUpdate, UserResponse, UserNotif
 from ...core.email_notification import confirm_email
 
 router = APIRouter()
@@ -34,6 +34,10 @@ async def update_user(user_id: int, data: UserUpdate, db: AsyncSession = Depends
         return await UserService.update_user(user_id, data, db)
     else:
         raise HTTPException(status_code=401, detail="Недостаточно прав")
+    
+@router.put('/update-email', tags=["Пользователи"], summary="Обновление email")
+async def update_user(data: UserEmailUpdate, db: AsyncSession = Depends(get_session)):
+    return await UserService.update_email(data, db)
 
 @router.delete('/users/{user_id}', tags=["Пользователи"], summary="Удаление пользователя")
 async def delete_user(user_id: int, db: AsyncSession = Depends(get_session), current_user: dict = Depends(get_current_user)):

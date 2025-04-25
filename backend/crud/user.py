@@ -7,7 +7,7 @@ from sqlalchemy.orm import selectinload
 from ..schemas.pass_reset import SuccessMessage
 from ..core.security import get_hashed_password
 from ..models.user import User
-from ..schemas.user import UserCreate, UserUpdate
+from ..schemas.user import UserCreate, UserEmailUpdate, UserUpdate
 
 async def create_user(data: UserCreate, db: AsyncSession) -> User:
     hashed_password = await get_hashed_password(data.password)
@@ -78,6 +78,27 @@ async def update_user(user_id: int, data: UserUpdate, db: AsyncSession) -> User:
             return user
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка при обновлении пользователя: {str(e)}")
+async def update_email(data: UserEmailUpdate, db: AsyncSession) -> User:
+    try:
+        if db.in_transaction():
+            await db.rollback()
+        async with db.begin():
+            result = await db.execute(select(User).filter(User.email == data.old_email))
+            user = result.scalar_one_or_none()
+            if not user:
+                raise Exception("Пользователь не найден")
+            if data.new_email:
+                user.email = data.new_email
+                return SuccessMessage(
+                    success=True,
+                    status_code=200,
+                    message="Email успешно обновлен"
+                )
+            raise Exception("Email не найден")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(500, detail=f"Ошибка при обновлении пользователя: {str(e)}")
 
 async def update_user_password(email: str, new_password: str, db: AsyncSession) -> SuccessMessage:
     try:
