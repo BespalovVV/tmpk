@@ -170,7 +170,7 @@ async def send_confirmation_email(email: EmailStr, db: AsyncSession) -> SuccessM
             detail=f"Server error: {str(e)}"
         )
 
-def is_email_from_domain(email, domain):
+def is_email_from_domain(email, domain): #uni-dubna.ru
     pattern = fr"^[a-zA-Z0-9._%+-]+@{re.escape(domain)}$"
     return bool(re.fullmatch(pattern, email))
 
@@ -189,7 +189,7 @@ async def confirm_email(token: str, db: AsyncSession) -> SuccessMessage:
                 status_code=404,
                 detail="User not found"
             )
-        if is_email_from_domain(user.email, 'gmail.com'):
+        if is_email_from_domain(user.email, settings.VALID_DOMAIN):
             await UserService.update_email_verification_status(email=email, db=db)
         
         return SuccessMessage(
