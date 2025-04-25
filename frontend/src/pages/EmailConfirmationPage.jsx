@@ -16,7 +16,7 @@ const EmailConfirmationPage = () => {
                     setStatus('success');
                     setMessage('Email успешно подтверждён!');
 
-                    setTimeout(() => navigate('/'), 3000);
+                    setTimeout(() => navigate('/'), 5000);
                 } else {
                     setStatus('error');
                     setMessage(response.data.message || 'Ошибка подтверждения email');
