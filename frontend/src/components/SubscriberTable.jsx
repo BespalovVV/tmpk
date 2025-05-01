@@ -24,23 +24,24 @@ const SubscriberTable = ({
         </thead>
         <tbody>
           <tr>
-            <td>{id}</td>
-            <td>{status}</td>
-            <td>{fullName}</td>
-            <td className="address-column">{address}</td>
-            <td>{phone}</td>
-            <td className='td-list'>
+            <td data-label="Договор">{id}</td>
+            <td data-label="Статус">{status}</td>
+            <td data-label="ФИО">{fullName}</td>
+            <td data-label="Адрес">{address}</td>
+            <td data-label="Телефон">{phone}</td>
+            <td data-label="Услуги" className="td-list">
               <ul className="services-list">
                 {services.map((service, index) => (
                   <li key={index}>{service}</li>
                 ))}
               </ul>
             </td>
-            <td>{switchName}</td>
-            <td>{switchIp}</td>
-            <td>{portNumber}</td>
+            <td data-label="Коммутатор">{switchName}</td>
+            <td data-label="IP-адрес">{switchIp}</td>
+            <td data-label="Порт">{portNumber}</td>
           </tr>
         </tbody>
+
       </table>
 
       <div className="options-buttons">

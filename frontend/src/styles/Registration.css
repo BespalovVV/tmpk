@@ -21,7 +21,7 @@
 .main-message {
     color: #1436E0;
     font-size: 28px;
-  margin: 0;
+    margin: 0;
 }
   
 .additional-message {
@@ -59,7 +59,7 @@
     cursor: pointer;
 }
   
-.to-sign-up, .to-sign-in {
+.to-sign-up, .to-sign-in, .to-support {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -70,8 +70,8 @@
 
 @media screen and (max-width: 767px) {
     .sign-in {
-      padding: 20px;
-      width: 100%;
+        padding: 20px;
+        width: 100%;
     }
 
     .additional-message {
@@ -92,7 +92,7 @@
         justify-content: center;
     }
 
-    .to-sign-up, .to-sign-in {
+    .to-sign-up, .to-sign-in, .to-support {
         flex-direction: unset;
         gap: 6px;
         justify-content: center;
@@ -115,6 +115,14 @@
 
     .main-message {
         color: #000000;
+    }
+
+    .to-support {
+        margin-top: 144px;
+    }
+    
+    .email-edit-container {
+        margin-top: 48px;
     }
 }
   
@@ -164,4 +172,26 @@
 .registration__message {
     display: grid;
     gap: 12px;
+}
+
+.main-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgb(102, 102, 102);
+    transition: color 0.2s ease;
+  }
+  
+.main-icon:hover {
+    color: rgb(0, 0, 0);
+}
+
+.email-edit-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+}
+
+.email-edit-container {
+    max-width: 550px;
 }

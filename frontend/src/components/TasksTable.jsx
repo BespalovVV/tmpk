@@ -15,10 +15,10 @@ const SubscriberTable = ({ data }) => {
         <tbody>
           {data.map(sub => (
               <tr className="summary-row">
-                <td>{sub.id}</td>
-                <td>{sub.topic}</td>
-                <td>{sub.contract}</td>
-                <td>{sub.description}</td>
+                <td data-label="Задача">{sub.id}</td>
+                <td data-label="Тема">{sub.topic}</td>
+                <td data-label="Договор">{sub.contract}</td>
+                <td data-label="Описание">{sub.description}</td>
               </tr>
           ))}
         </tbody>

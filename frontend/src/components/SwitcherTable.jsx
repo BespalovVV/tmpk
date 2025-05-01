@@ -16,9 +16,9 @@ const SubscriberTable = ({
             </thead>
             <tbody>
             <tr>
-                <td>{switchName}</td>
-                <td>{switchIp}</td>
-                <td className='td-list'>
+                <td data-label="Коммутатор">{switchName}</td>
+                <td data-label="IP-адрес">{switchIp}</td>
+                <td className="td-list" data-label="Порт">
                     <ul className="ports-list">
                         {portNumbers.map((portNumber) => (
                             <li>{portNumber}</li>

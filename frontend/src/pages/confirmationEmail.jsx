@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import '../styles/EmailConfirmationMessage.css';
+import '../styles/Registration.css';
+import '../styles/SignUpSuccess.css';
 import api from "../API/axiosInstance";
+import ItWorkSidebar from '../components/ItWorkSidebar';
+import MyButton from '../components/UI/button/MyButton';
+import MyInput from '../components/UI/input/MyInput';
+import { HiOutlinePencil  } from 'react-icons/hi';
 
 const EmailConfirmationMessage = () => {
     const location = useLocation();
@@ -31,6 +36,10 @@ const EmailConfirmationMessage = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+    
+    const handleRedirect = () => {
+        navigate('/contact-support');
     };
 
     const handleUpdateEmail = async () => {
@@ -83,67 +92,64 @@ const EmailConfirmationMessage = () => {
     };
 
     return (
-        <div className="confirmation-message-container">
-            <div className="confirmation-card">
-                <h2>Подтвердите ваш email</h2>
-
-                <div className="icon-container">
-                    <svg /* Иконка письма */ >...</svg>
-                </div>
-
+        <div className="confirmation-message-container registration-page">
+            <div className="confirmation-card registration__message">
+                <p className="main-message">Подтвердите ваш email</p>
                 {isEditing ? (
                     <div className="email-edit-container">
-                        <input
-                            type="email"
-                            value={new_email}
-                            onChange={(e) => setNewEmail(e.target.value)}
-                            placeholder="Введите новый email"
-                            className="email-input"
-                        />
+                        <div className="email-input">
+                            <MyInput
+                                type="email"
+                                value={new_email}
+                                onChange={(e) => setNewEmail(e.target.value)}
+                                placeholder="Введите новый email"
+                                className="email-input change-email-input"
+                            />
+                        </div>
                         <div className="email-edit-buttons">
-                            <button
+                            <MyButton
                                 onClick={handleUpdateEmail}
                                 disabled={isLoading}
-                                className="save-button"
+                                className="save-button secondary-button"
                             >
                                 {isLoading ? 'Сохранение...' : 'Сохранить'}
-                            </button>
-                            <button
+                            </MyButton>
+                            <MyButton
                                 onClick={() => {
                                     setIsEditing(false);
                                     setNewEmail(email);
                                     setMessage({ text: '', isError: false });
                                 }}
-                                className="cancel-button"
+                                className="cancel-button secondary-button"
                             >
                                 Отмена
-                            </button>
+                            </MyButton>
                         </div>
                     </div>
                 ) : (
-                    <p>
-                        Мы отправили письмо с подтверждением на адрес <strong>{email}</strong>.
+                    <p className="additional-text">
+                        Мы отправили письмо с подтверждением на адрес <strong>{email}</strong>
                         <button
                             onClick={() => setIsEditing(true)}
-                            className="action-buttons"
+                            className="main-icon"
                         >
-                            Изменить
+                            <HiOutlinePencil size={16}/>
                         </button>
                     </p>
                 )}
 
-                <p className="secondary-text">
-                    Если письмо не пришло, проверьте папку "Спам" или запросите повторную отправку.
-                </p>
+                <div>
+                    <p className="secondary-text">
+                        Если письмо не пришло, проверьте папку "Спам" или запросите повторную отправку.
+                    </p>
 
-                <div className="action-buttons">
-                    <button
+                    <MyButton
                         onClick={handleResendEmail}
                         disabled={isLoading || isEditing}
-                        className="resend-button"
+                        className="resend-button auth"
                     >
                         {isLoading ? 'Отправка...' : 'Отправить письмо повторно'}
-                    </button>
+                    </MyButton>
                 </div>
 
                 {message.text && (
@@ -152,10 +158,12 @@ const EmailConfirmationMessage = () => {
                     </p>
                 )}
 
-                <p className="support-text">
-                    Возникли проблемы? <a href="/contact-support">Свяжитесь с поддержкой</a>
-                </p>
+                <div className="to-support">
+                    <span className="secondary-text">Возникли проблемы?</span> 
+                    <MyButton className="secondary-button auth" type="button" onClick={handleRedirect}>Свяжитесь с поддержкой</MyButton>
+                </div>
             </div>
+            <ItWorkSidebar />
         </div>
     );
 };
