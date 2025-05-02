@@ -12,7 +12,7 @@ export const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate('/signin');
+    navigate('/signup');
   };
 
   const onSubmit = async (data) => {

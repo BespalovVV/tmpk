@@ -23,9 +23,9 @@ const SubscriberTable = ({ data }) => {
           {data.map(sub => (
             <React.Fragment key={sub.id}>
               <tr onClick={() => toggleRow(sub.id)} className={`summary-row ${selectedId === sub.id ? 'no-border' : ''}`}>
-                <td>{sub.id}</td>
-                <td>{sub.fullName}</td>
-                <td className="address-column">{sub.address}</td>
+                <td data-label="Договор">{sub.id}</td>
+                <td data-label="ФИО">{sub.fullName}</td>
+                <td className="address-column" data-label="Адрес">{sub.address}</td>
               </tr>
               {selectedId === sub.id && (
                 <tr className="details-row">
@@ -44,18 +44,18 @@ const SubscriberTable = ({ data }) => {
 
                       <tbody>
                       <tr>
-                        <td>{sub.status}</td>
-                        <td>{sub.phone}</td>
-                        <td className='td-list'>
+                        <td data-label="Статус">{sub.status}</td>
+                        <td data-label="Телефон">{sub.phone}</td>
+                        <td className="td-list" data-label="Услуги">
                           <ul className="services-list">
                             {sub.services.map((service, index) => (
                               <li key={index}>{service}</li>
                             ))}
                           </ul>
                         </td>
-                        <td>{sub.switchName}</td>
-                        <td>{sub.switchIp}</td>
-                        <td>{sub.portNumber}</td>
+                        <td data-label="Коммутатор">{sub.switchName}</td>
+                        <td data-label="IP-адрес">{sub.switchIp}</td>
+                        <td data-label="Порт">{sub.portNumber}</td>
                       </tr>
                       <tr className="buttons-row">
                         <td colSpan="6">
