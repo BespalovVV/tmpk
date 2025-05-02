@@ -14,7 +14,7 @@ const SubscriberTable = ({ data }) => {
         </thead>
         <tbody>
           {data.map(sub => (
-              <tr className="summary-row">
+              <tr key={sub.id} className="summary-row">
                 <td>{sub.id}</td>
                 <td>{sub.topic}</td>
                 <td>{sub.contract}</td>

@@ -21,7 +21,7 @@ const SubscriberTable = ({
                 <td className='td-list'>
                     <ul className="ports-list">
                         {portNumbers.map((portNumber) => (
-                            <li>{portNumber}</li>
+                            <li key={portNumber}>{portNumber}</li>
                         ))}
                     </ul>
                 </td>
