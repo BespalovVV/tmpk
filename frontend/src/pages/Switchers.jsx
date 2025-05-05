@@ -13,10 +13,10 @@ const Switchers = () => {
   const [switchData, setSwitchData] = useState(null);
   const [error, setError] = useState('');
 
-  const isValidIp = (ip) => {
-    const ipRegex = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
-    return ipRegex.test(ip);
-  };
+   const isValidIp = (ip) => {
+     const ipRegex = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
+     return ipRegex.test(ip);
+   };
   
   const handleSearch = async (query) => {
     setError('');
