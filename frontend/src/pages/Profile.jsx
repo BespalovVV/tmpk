@@ -165,24 +165,24 @@ const Profile = () => {
             }
           />
           <InfoBlock 
-      header="Забыли пароль?" 
-      body={
-        <div className="buttons">
-          <MyButton 
-            className="button-registration primary-button auth" 
-            onClick={handleResetByEmail}
-            disabled={isResetting}
-          >
-            {isResetting ? 'Отправка...' : 'Сбросить пароль с помощью почты'}
-          </MyButton>
-          {resetStatus.message && (
-            <p className={resetStatus.isError ? 'error-message' : 'success-message'}>
-              {resetStatus.message}
-            </p>
-          )}
-        </div>
-      }
-    />
+            header="Забыли пароль?" 
+            body={
+              <div className="buttons">
+                <MyButton 
+                  className="button-registration primary-button auth" 
+                  onClick={handleResetByEmail}
+                  disabled={isResetting}
+                >
+                  {isResetting ? 'Отправка...' : 'Сбросить пароль с помощью почты'}
+                </MyButton>
+                {resetStatus.message && (
+                  <p className={resetStatus.isError ? 'error-message' : 'success-message'}>
+                    {resetStatus.message}
+                  </p>
+                )}
+              </div>
+            }
+          />
         </div>
 
         <div className="buttons main-buttons">

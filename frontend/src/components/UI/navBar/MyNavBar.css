@@ -10,80 +10,79 @@
     flex-wrap: wrap;
 }
 
-.menu-image {
-    display: none;
-    max-width: 34px;
+.menu-header {
+    align-items: center;
+    background-color: #ffffff;
+    bottom: 0;
+    display: flex;
+    gap: 16px;
+    justify-content: space-around;
+    left: 0;
+    right: 0;
+    position: fixed;
+    top: auto; 
+    z-index: 1000;
 }
 
 .menu-header__text .text-full {
-    display: inline;
-}
-
-.menu-header__text .text-short {
     display: none;
 }
 
-@media screen and (max-width: 768px) {
-    .menu-header {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: auto; 
-        justify-content: space-around;
-        background-color: #ffffff;
-    }
+.menu-header__text .text-short {
+    display: inline;
+}
 
-    .menu-image {
-        display: block;
-    }
 
-    .menu-header > .headline-tmpk {
-        display: none;
-    }
+.menu-image {
+    display: block;
+    max-width: 34px;
+}
 
-    .menu-header__text .text-full {
-        display: none;
-    }
-    
-    .menu-header__text .text-short {
-        display: inline;
-    }
-
-    .menu-header > .headline-tmpk {
-        font-size: 24px;
-    }
+.menu-header > .headline-tmpk {
+    display: none;
+    font-size: 24px;
 }
   
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
     .home-header {
         display: none;
     }
 
     .menu-header {
         justify-content: space-between;
+        left: 70px;
+        padding-top: 20px;
+        padding-right: 60px;
         position: sticky;
+        right: 0;
         top: 0;
     }
-}
+    
+    .menu-header > .headline-tmpk {
+        display: flex;
+    }
 
-@media screen and (max-width: 1024px) {
-    .menu-header__text > span {
-        font-size: 13px;
+    .menu-header__text .text-full {
+        display: inline;
+    }
+    
+    .menu-header__text .text-short {
+        display: none;
+    }
+
+    .menu-image {
+        display: none;
     }
 }
 
-@media screen and (min-width: 1025px) {
+.menu-header__text > span {
+    font-size: 13px;
+}
+
+@media screen and (min-width: 1024px) {
     .menu-header__text > span {
         font-size: 16px;
     }
-}
-
-.menu-header {
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 16px;
 }
 
 .menu__logo {
@@ -97,4 +96,24 @@
 
 .menu-header__text_active {
     color: #1436E0;
+}
+
+.menu-header::before {
+    background: linear-gradient(
+        196deg,
+        rgba(20, 54, 224, 0.2) 0%,
+        rgba(255, 255, 255, 0.2) 25%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    background-attachment: fixed;
+    content: '';
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    right: -60px;
+    z-index: -1;
 }

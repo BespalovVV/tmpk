@@ -1,26 +1,27 @@
-@media screen and (max-width: 767px) {
-    .headline-tmpk {
-        justify-content: center;
-    }  
+.headline-tmpk {
+    justify-content: center;
+}  
 
-    .tmpk-text {
-        display: none !important;
-    }
+.tmpk-text {
+    display: none !important;
+    font-size: 20px;
 }
 
 @media screen and (min-width: 768px) {
     .authorized-logo {
         display: none !important;
-    }
-}
+    }    
 
-@media screen and (max-width: 1024px) {
+    .headline-tmpk {
+        justify-content: flex-start;
+    }  
+
     .tmpk-text {
-        font-size: 20px;
-    }
+        display: block !important;
+    }    
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
     .tmpk-text {
         font-size: 22px;
     }

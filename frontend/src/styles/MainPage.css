@@ -27,7 +27,6 @@
 .main-page__username {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 16px;
     margin-bottom: auto;
     margin-top: auto;
 }
@@ -63,10 +62,10 @@
     font-weight: bold;
 }
  
-.user {
-    align-items: center;
-    display: flex;
-    gap: 8px; 
+.user {    
+    align-items: flex-end;
+    display: inline-flex;
+    gap: 4px; 
     margin-bottom: 1em;
 }
   

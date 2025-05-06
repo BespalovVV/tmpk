@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import MyButton from '../components/UI/button/MyButton';
 import MySearch from '../components/UI/search/MySearch';
-import '../styles/Switchers.css';
 import SwitcherTable from '../components/SwitcherTable';
 import SwitchService from '../API/SwitchService';
 import PortService from '../API/PortService';
@@ -93,7 +92,7 @@ const Switchers = () => {
     <div className="switchers-page">
       <div className="search-toggle">
         <MyButton
-          className={`secondary-button button-toggle ${activeSearch === 'ip' ? 'button-toggle_active' : ''}`}
+          className={`button-toggle ${activeSearch === 'ip' ? 'button-toggle_active' : ''}`}
           type="button"
           onClick={() => setActiveSearch('ip')}
         >
@@ -101,7 +100,7 @@ const Switchers = () => {
         </MyButton>
 
         <MyButton
-          className={`secondary-button button-toggle ${activeSearch === 'address' ? 'button-toggle_active' : ''}`}
+          className={`button-toggle ${activeSearch === 'address' ? 'button-toggle_active' : ''}`}
           type="button"
           onClick={() => setActiveSearch('address')}
         >

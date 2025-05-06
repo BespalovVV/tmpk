@@ -26,46 +26,53 @@ const Addresses = () => {
     try {
       const normalized = trimmed.toLowerCase().replace(/\s/g, '');
       const allAddresses = await AddressService.getAll();
-      const foundAddress = allAddresses.find(a =>
+      const matchedAddresses = allAddresses.filter(a =>
         a.address.toLowerCase().replace(/\s/g, '').includes(normalized)
       );
   
-      if (!foundAddress) {
+      if (matchedAddresses.length === 0) {
         setError('Адрес не найден');
         return;
       }
   
-      const offer = (await OffersService.getAll()).find(o => o.address_id === foundAddress.id);
+      const allOffers = await OffersService.getAll();
+      const allPorts = await PortService.getAll();
   
-      if (!offer) {
-        setError('Договор по этому адресу не найден');
-        return;
+      const results = await Promise.all(
+        matchedAddresses.map(async (address) => {
+          const offer = allOffers.find(o => o.address_id === address.id);
+          if (!offer) return null;
+  
+          const abon = await AbonentService.getById(offer.abon_id);
+          const port = allPorts.find(p => p.switch_id === address.com_id);
+          const sw = await SwitchService.getById(address.com_id);
+  
+          const serviceIds = await ServiceService.getByIdOf(offer.id);
+          const services = await Promise.all(
+            serviceIds.map(id => ServiceService.getById(id))
+          );
+          const serviceNames = services.map(s => s.name_service);
+  
+          return {
+            id: offer.id,
+            status: abon.status || 'Статус неизвестен',
+            fullName: offer.abon_name,
+            address: address.address,
+            phone: formatPhone(offer.phone),
+            services: serviceNames.length ? serviceNames : ['—'],
+            switchName: sw.name_com || '—',
+            switchIp: sw.IP || '—',
+            portNumber: port?.number || '—'
+          };
+        })
+      );
+  
+      const filteredResults = results.filter(r => r !== null);
+      if (filteredResults.length === 0) {
+        setError('Договор по найденным адресам не найден');
+      } else {
+        setData(filteredResults);
       }
-  
-      const abon = await AbonentService.getById(offer.abon_id);
-      const ports = await PortService.getAll();
-      const port = ports.find(p => p.switch_id === foundAddress.com_id);
-  
-      const sw = await SwitchService.getById(foundAddress.com_id);
-  
-      const serviceIds = await ServiceService.getByIdOf(offer.id);
-      const services = [];
-      for (let id of serviceIds) {
-        const service = await ServiceService.getById(id);
-        services.push(service.name_service);
-      }
-  
-      setData([{
-        id: offer.id,
-        status: abon.status || 'Статус неизвестен',
-        fullName: offer.abon_name,
-        address: foundAddress.address,
-        phone: formatPhone(offer.phone),
-        services: services.length ? services : ['—'],
-        switchName: sw.name_com || '—',
-        switchIp: sw.IP || '—',
-        portNumber: port?.number || '—'
-      }]);
   
     } catch (err) {
       console.error(err);
@@ -73,12 +80,13 @@ const Addresses = () => {
     }
   };
   
+  
 
   return (
     <div className="addresses-page">
       <MySearch placeholder="Введите адрес абонента" onSearch={handleSearch} />
       {error && <div style={{ color: 'red', marginTop: '1rem' }}>{error}</div>}
-      <AddressTable data={data} />
+      {data.length !== 0 && <AddressTable data={data} />}
     </div>
   );
 };
