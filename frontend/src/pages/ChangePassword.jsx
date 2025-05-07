@@ -23,7 +23,7 @@ export const ChangePassword = () => {
 
   return (
     <div className="registration-page">
-      <div className="registration">
+      <div className="registration registration_small">
         <div className="registration__message">
             <p className="additional-message secondary-text all-devices-text">Смените пароль</p>
         </div>
