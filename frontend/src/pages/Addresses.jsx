@@ -79,7 +79,6 @@ const Addresses = () => {
       setError('Ошибка при поиске адреса');
     }
   };
-  ы
 
   return (
     <div className="addresses-page">

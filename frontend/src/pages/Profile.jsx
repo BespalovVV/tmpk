@@ -121,21 +121,22 @@ const Profile = () => {
                 </div>
 
                 <div className="password-input">
-                  <MyInput
-                    label="Новый пароль"
-                    type="password"
-                    placeholder="Придумайте новый пароль"
-                    {...register("new_password", {
-                      required: 'Обязательное поле',
-                      minLength: {
-                        value: 6,
-                        message: 'Минимум 6 символов'
-                      }
-                    })}
-                  />
-                  {errors.new_password && <p className="error" style={{textAlign: "center"}}>{errors.new_password.message}</p>}
-                </div>
-
+                <MyInput
+                label="Новый пароль"
+                type="password"
+                placeholder="Придумайте новый пароль"
+                {...register("new_password", {
+                  required: "Поле обязательно к заполнению",
+                  minLength: { value: 8, message: "Пароль должен быть не меньше 8 символов" },
+                  maxLength: { value: 64, message: "Пароль не должен превышать 64 символа" },
+                  pattern: {value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{8,}$/,
+                  message: "Пароль должен содержать заглавную, строчную букву, цифру и не содержать пробелов",
+                },
+                })}
+                />
+                {errors.new_password && (<p className="error" style={{ textAlign: "center" }}>{errors.new_password.message}</p>
+              )}
+              </div>
                 <div className="password-verification-input">
                   <MyInput
                     label="Подтвердите пароль"
