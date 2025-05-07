@@ -1,10 +1,10 @@
 .my-input input {
-    padding: 12px;
-    border-radius: 8px;
     border: 1px solid #666666;
-    width: 100%;
+    border-radius: 8px;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 15px;
+    padding: 12px;
+    width: 100%;
 }
 
 .my-input {
@@ -13,21 +13,21 @@
 }
 
 .my-input label {
-    position: absolute;
-    left: 16px;
-    top: -10px;
-    padding: 0 4px;
     background: white;
-    font-size: 14px;
     color: #666666;
+    font-size: 12px;
+    left: 16px;
+    padding: 0 4px;
+    position: absolute;
+    top: -10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 1024px) {
     .my-input input {
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .my-input label {
-        font-size: 12px;
+        font-size: 14px;
     }
 }

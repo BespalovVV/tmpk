@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import '../styles/MainPage.css';
 import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
-import arrowMore from '../assets/arrow-more.png';
 import TaskService from '../API/TaskService';
 import OffersService from '../API/OffersService';
 import AddressService from '../API/AddressService';
+import { FaChevronRight  } from 'react-icons/fa';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const MainPage = () => {
         <span className="main-page__username">
         {username?.split(" ").slice(1).join(" ")}
         </span>
-        <img className="arrow-more" alt="" src={arrowMore} />
+        <FaChevronRight size={16}/>
       </div>
 
       <div className="main-page__cards">

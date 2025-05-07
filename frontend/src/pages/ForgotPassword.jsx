@@ -38,7 +38,7 @@ export const ForgotPassword = () => {
 
   return (
     <div className="registration-page">
-      <div className="registration">
+      <div className="registration registration_small">
         <div className="registration__message">
           <p className="main-message">Восстановить пароль</p>
           <p className="additional-message secondary-text all-devices-text">

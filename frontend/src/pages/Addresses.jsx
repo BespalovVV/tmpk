@@ -80,11 +80,12 @@ const Addresses = () => {
     }
   };
 
+
   return (
     <div className="addresses-page">
       <MySearch placeholder="Введите адрес абонента" onSearch={handleSearch} />
       {error && <div style={{ color: 'red', marginTop: '1rem' }}>{error}</div>}
-      <AddressTable data={data} />
+      {data.length !== 0 && <AddressTable data={data} />}
     </div>
   );
 };

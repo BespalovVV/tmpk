@@ -103,10 +103,6 @@ const SignIn = () => {
           </div>
 
           <div className="additionally">
-            <div className="remember-me">
-              <input type="checkbox" id="remember-me__input" />
-              <label htmlFor="remember-me__input">Запомнить меня</label>
-            </div>
             <div className="forgot-password" onClick={handleForgotPassword}>Забыли пароль?</div>
           </div>
 

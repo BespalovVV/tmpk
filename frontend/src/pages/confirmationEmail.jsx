@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Registration.css';
-import '../styles/SignUpSuccess.css';
 import api from "../API/axiosInstance";
 import ItWorkSidebar from '../components/ItWorkSidebar';
 import MyButton from '../components/UI/button/MyButton';

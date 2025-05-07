@@ -1,14 +1,14 @@
 .my-button {
+    background-color: #1436E0;
     border-color: #1436E0;
     border-radius: 10px;
     box-shadow: 0 1px 2px 0 #1436E0;
+    color: #FFFFFF;
     cursor: pointer;
     font-size: 14px;
+    max-width: 300px;
     padding: 10px 24px;
     width: 100%;
-    max-width: 300px;
-    background-color: #1436E0;
-    color: #FFFFFF;
 }
 
 .primary-button {
@@ -20,25 +20,45 @@
 
 .secondary-button {
     background-color: #FFFFFF;
+    box-shadow: none;
+    border: none;
     color: #1436E0;
     max-width: 250px;
+    padding: 0;
+    width: max-content;
 }
 
-@media screen and (max-width: 769px) {
-    .my-button {
-        font-size: 14px;
-    }
-    .secondary-button {
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        width: max-content;
+.search-toggle {
+    align-items: center;
+    display: flex;
+    flex-direction: column; 
+    gap: 8px;
+}
+
+@media screen and (min-width: 480px) {
+    .search-toggle {
+        align-items: stretch;
+        flex-direction: unset;
+        justify-content: space-evenly;
+        gap: 10px;
     }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (max-width: 767px) {
+    .button-toggle {
+        padding: 10px 2px;
+    }
+}
+
+@media screen and (min-width: 768px) {
     .auth {
         border-radius: 24px;
+    }
+
+    .my-button {
+        box-shadow: 0 1px 2px 0 #1436E0;
+        padding: 10px 24px;
+        width: 100%;
     }
 }
 
@@ -47,8 +67,10 @@
 }
 
 .button-toggle {
+    background-color: #FFFFFF;
     border: 1px solid #666666;
     box-shadow: none;
+    color: #1436E0;
 }
 
 .button-toggle_active {
