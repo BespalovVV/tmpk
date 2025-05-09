@@ -189,8 +189,9 @@ async def confirm_email(token: str, db: AsyncSession) -> SuccessMessage:
                 status_code=404,
                 detail="User not found"
             )
-        if is_email_from_domain(user.email, settings.VALID_DOMAIN):
-            await UserService.update_email_verification_status(email=email, db=db)
+        # if is_email_from_domain(user.email, settings.VALID_DOMAIN):
+        #     await UserService.update_email_verification_status(email=email, db=db)
+        await UserService.update_email_verification_status(email=email, db=db)
         
         return SuccessMessage(
             success=True,

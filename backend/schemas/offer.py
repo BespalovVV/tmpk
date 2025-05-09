@@ -12,7 +12,14 @@ class OfferCreate(BaseModel):
     
     class Config:
         from_attributes = True
+
+class OfferServiceCreate(BaseModel):
+    offer_id: int
+    service_id: int
     
+    class Config:
+        from_attributes = True
+        
 class OfferUpdate(BaseModel):
     phone: Optional[str] = Field(None, max_length=10)
     osmp: Optional[int] = None

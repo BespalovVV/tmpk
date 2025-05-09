@@ -30,7 +30,7 @@ async def get_user_by_email(email: str, db: AsyncSession = Depends(get_session))
 
 @router.put('/users/{user_id}', tags=["Пользователи"], summary="Обновление пользователя")
 async def update_user(user_id: int, data: UserUpdate, db: AsyncSession = Depends(get_session), current_user: dict = Depends(get_current_user)):
-    if current_user['user_role'] == "admin":
+    if current_user['user_role'] == "admin" or int(current_user['user_id']) == int(user_id):
         return await UserService.update_user(user_id, data, db)
     else:
         raise HTTPException(status_code=401, detail="Недостаточно прав")
@@ -45,8 +45,4 @@ async def delete_user(user_id: int, db: AsyncSession = Depends(get_session), cur
         return await UserService.delete_user(user_id, db)
     else:
         raise HTTPException(status_code=401, detail="Недостаточно прав")
-    
-@router.post('/users/reg', tags=["Пользователи"], summary="отправка сообщения")
-async def delete_user(data: UserNotif, db: AsyncSession = Depends(get_session)):
-        return await confirm_email(data=data, db=db)
     

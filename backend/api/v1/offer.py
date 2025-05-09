@@ -3,13 +3,17 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from ...crud import offer as OfferService
 from ...db.session import get_session
-from ...schemas.offer import OfferCreate, OfferUpdate, OfferResponse
+from ...schemas.offer import OfferCreate, OfferServiceCreate, OfferUpdate, OfferResponse
 
 router = APIRouter()
 
 @router.post("/offers", response_model=OfferResponse, summary="Создание договора", tags=["Договоры"])
 async def create_offer_handler(data: OfferCreate, db: AsyncSession = Depends(get_session)):
     return await OfferService.create_offer(data, db)
+
+@router.post("/offers_services", response_model=bool, summary="Подключение услуги к договору", tags=["Договоры"])
+async def create_offer_handler(data: OfferServiceCreate, db: AsyncSession = Depends(get_session)):
+    return await OfferService.add_service(data.offer_id, data.service_id, db)
 
 @router.get("/offers", response_model=List[OfferResponse], summary="Получение всех договоров", tags=["Договоры"])
 async def get_all_offers_handler(db: AsyncSession = Depends(get_session)):
