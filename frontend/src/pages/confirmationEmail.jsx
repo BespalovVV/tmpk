@@ -46,47 +46,57 @@ const EmailConfirmationMessage = () => {
             setMessage({ text: 'Введите корректный email', isError: true });
             return;
         }
-
+    
         try {
             setIsLoading(true);
             setMessage({ text: '', isError: false });
-
+    
             const response = await api.put('update-email', {
                 old_email: email,
                 new_email
             });
-
+    
             if (!response.data.success) {
                 throw new Error(response.data.message || 'Не удалось изменить email');
             }
-
+    
             const updatedEmail = new_email;
-
             setEmail(updatedEmail);
             location.state.email = updatedEmail;
             setIsEditing(false);
-
+    
             setMessage({
                 text: 'Email успешно изменён. Отправляем новое письмо подтверждения...',
                 isError: false
             });
-
+    
             await handleResendEmail();
-
+    
         } catch (error) {
-            setMessage({
-                text: error.response?.data?.message ||
-                    error.message ||
-                    'Ошибка при изменении email',
-                isError: true
-            });
+            if (error.response?.status === 500) {
+                setMessage({
+                    text: 'Этот email уже зарегистрирован.',
+                    isError: true
+                });
+            } else if (error.response?.status === 422) {
+                setMessage({
+                    text: 'Этот email уже зарегистрирован.',
+                    isError: true
+                });
+            } else {
+                setMessage({
+                    text: error.response?.data?.message || error.message || 'Ошибка при изменении email',
+                    isError: true
+                });
+            }
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
         return re.test(email);
     };
 
@@ -117,7 +127,7 @@ const EmailConfirmationMessage = () => {
                                 onClick={() => {
                                     setIsEditing(false);
                                     setNewEmail(email);
-                                    setMessage({ text: '', isError: false });
+                                    setMessage({ text: '', isError: false});
                                 }}
                                 className="cancel-button secondary-button"
                             >
@@ -152,10 +162,10 @@ const EmailConfirmationMessage = () => {
                 </div>
 
                 {message.text && (
-                    <p className={`message ${message.isError ? 'error' : 'success'}`}>
+                    <p style={{ color: 'red' }} className={`message ${message.isError ? 'error' : 'success'}`}>
                         {message.text}
                     </p>
-                )}
+                ) }
 
                 <div className="to-support">
                     <span className="secondary-text">Возникли проблемы?</span> 

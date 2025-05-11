@@ -43,7 +43,7 @@ const Abonents = () => {
           switchIp: switches.IP || '—',
           portNumber: port.number || '—',
         });
-      } else if (/^\d{1,3}(\.\d{1,3}){3}$/.test(query)) {
+      } else if (/^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/.test(query)) {
         const sw = await SwitchService.getByIp(query);
         const allAddresses = await AddressService.getAll();
         const address = allAddresses.find(a => a.com_id === sw.id);

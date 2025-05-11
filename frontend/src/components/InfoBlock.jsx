@@ -9,7 +9,7 @@ const InfoBlock = ({ header, body }) => {
         {header}
       </div>
       <div className="info__body">
-        <p>{body}</p>
+        <span>{body}</span>
       </div>
     </div>
     );
