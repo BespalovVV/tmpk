@@ -33,7 +33,7 @@ class User(Base):
     login: Mapped[str_64] = mapped_column(nullable=False, unique=True)
     password: Mapped[str_256] = mapped_column(nullable=False)
     email: Mapped[str_128] = mapped_column(nullable=False, unique=True)
-    role: Mapped[Role] = mapped_column(default=Role.unknown_user)
+    role: Mapped[Role] = mapped_column(default=Role.appruved_user)
     
 class Abonent(Base):
     __tablename__ = 'abonents'

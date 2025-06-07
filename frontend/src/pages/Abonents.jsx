@@ -35,7 +35,7 @@ const Abonents = () => {
         setSubscriber({
           id: data.id,
           status: abon.status || 'Статус неизвестен',
-          fullName: data.abon_name,
+          fullName: abon.abon_name,
           address: address.address,
           phone: formatPhone(data.phone),
           services: services.length ? services : ['—'],
@@ -74,7 +74,7 @@ const Abonents = () => {
         setSubscriber({
           id: offer.id,
           status: abon.status || 'Статус неизвестен',
-          fullName: offer.abon_name,
+          fullName: abon.abon_name,
           address: address.address,
           phone: formatPhone(offer.phone),
           services: services.length ? services : ['—'],

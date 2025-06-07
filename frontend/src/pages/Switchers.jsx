@@ -44,7 +44,7 @@ const Switchers = () => {
         }
   
         const allPorts = await PortService.getAll();
-        const relatedPorts = allPorts.filter(p => p.switch_id === data.id).map(p => p.number);
+        const relatedPorts = allPorts.filter(p => p.switch_id === data.id).map(p => `Порт ${p.number}: ${p.status_link}`);
   
         setSwitchData({
           name_com: data.name_com,
@@ -71,7 +71,9 @@ const Switchers = () => {
         }
   
         const allPorts = await PortService.getAll();
-        const relatedPorts = allPorts.filter(p => p.switch_id === name_sw.id).map(p => p.number);
+        const relatedPorts = allPorts
+          .filter(p => p.switch_id === name_sw.id)
+          .map(p => `Порт ${p.number}: ${p.status_link}`);
   
         setSwitchData({
           name_com: name_sw.name_com,
